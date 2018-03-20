@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class GeneradorComandos : MonoBehaviour {
 
+	//Sistema de pool para los prefabs de los comandos
 	SimpleObjectPool pool;
 
+	// Transform de referencia para el recorrido de los comandos
 	public Transform inicio;
 
+	// Transform de referencia para el recorrido de los comandos
 	public Transform fin;
 
+	// Arreglo de comandos a ser ejecutados, en teoría son configurados por la acción
+	// e.g. Cortar ingrediente, mezclar ingredientes
 	public Comando[] comandos;
 
+	// Distancia temporal entre comandos en la secuencia
 	public float delayComandos = 0.5f;
-	// Use this for initialization
+
+	// Configura el pool e inicia el proceso de autogenerar la secuencia de comandos especificada
 	void Start () {
 		pool = GetComponent<SimpleObjectPool>();
 
+		//OOOOJOOOOOO:
+		// TODO: esto es temporal, los comandos debería configurarlos la acción
+		// escogida por el usuario, una vez esté implementado eso este for se va
 		foreach(Comando com in comandos)
 		{
 			com.configurar(KeyCode.UpArrow);	
@@ -26,12 +36,14 @@ public class GeneradorComandos : MonoBehaviour {
 
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+	// Corutina para generar la secuencia de comandos a partir de 
+	// la lista especificada por la acción.
+	// Saca un prefab del pool, le configura el padre como este objeto,
+	// le pasa el pool para que este comando pueda retornarse según su criterio,
+	// configura los puntos de inicio y fin para la translación,
+	// le asigna la tecla que debe presionarse a partir de la lista especificada,
+	// le da la orden de que empiece su desplazamiento, y espera para producir el siguiente.
 	private IEnumerator Reproducir()
 	{
 		foreach(Comando com in comandos)
