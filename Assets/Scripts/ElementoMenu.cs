@@ -89,10 +89,12 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     // Al estar activo el botón, se devuelve un paso en la jerarquía.
     // Adicionalmente, establece al botón padre como el elemento seleccionado.
+    // Vacia la lista de ingredeintes a suar
     void Anterior()
     {
         if(activo && instanciaBBManager.getAccionSeleccionada() != null)
         {
+            Accion.instance.vaciarListaRecursosActuales();
             evSys.SetSelectedGameObject(BattleMenuManager.instance.backToLastOpcionSelected());
             if (panelMio != null)
             {

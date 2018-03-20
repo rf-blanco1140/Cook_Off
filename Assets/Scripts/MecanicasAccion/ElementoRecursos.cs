@@ -9,7 +9,7 @@ public class ElementoRecursos : MonoBehaviour
     // Variables
     //---------------------------------------------------------------------------
 
-    bool estaSeleccionado;
+    private bool estaSeleccionado;
 
 
     //---------------------------------------------------------------------------
@@ -38,6 +38,11 @@ public class ElementoRecursos : MonoBehaviour
         }
 
         reaccionEnInterfaz();
+    }
+
+    public void deseleccionarEsteElemento()
+    {
+        estaSeleccionado = false;
     }
 
     public void reaccionEnInterfaz()

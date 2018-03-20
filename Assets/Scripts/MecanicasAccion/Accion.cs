@@ -51,11 +51,6 @@ public class Accion : MonoBehaviour
         posEnListaIngredeintesQueUsara = 0;
 	}
 
-    // Metodo usado para incicializar la lista de ingredientes a usar una vez se ha inicializado la lista de todos los ingredientes
-    public void inicializarListas()
-    {
-        ingredeintesQueUsara = new GameObject[instanciaBMManager.getIngredeintesUsables().Length];
-    }
 
     // Selecciona los ingredientes que se van a usar en cada accion
     public void agregarIngredeintesParaAccion(GameObject objetoIngredeinte)
@@ -93,6 +88,22 @@ public class Accion : MonoBehaviour
         imprimirObjetosEnLista();
     }
 
+    // Vacia la lista y retorna el indice de la posisicon actual a 0
+    public void vaciarListaRecursosActuales()
+    {
+        for(int i=0; i < posEnListaIngredeintesQueUsara; i++)
+        {
+            GameObject objetoBorrar = ingredeintesQueUsara[i];
+            ElementoRecursos elem = objetoBorrar.GetComponent<ElementoRecursos>();
+            elem.deseleccionarEsteElemento();
+
+            ingredeintesQueUsara[i] = null;
+        }
+        posEnListaIngredeintesQueUsara = 0;
+    }
+
+    // ------------------------------------------------------------------------------------------------------
+
     public void imprimirObjetosEnLista()
     {
         Debug.Log("--------- inicio---------");
@@ -102,4 +113,12 @@ public class Accion : MonoBehaviour
         }
         Debug.Log("---------Fin---------");
     }
+
+    // Metodo usado para incicializar la lista de ingredientes a usar una vez se ha inicializado la lista de todos los ingredientes
+    // EN el momento este metodo no srive pa nada !!!!!!!!!!!!!!!!!
+    /*
+    public void inicializarListas()
+    {
+        //ingredeintesQueUsara = new GameObject[instanciaBMManager.getIngredeintesUsables().Length];
+    }*/
 }

@@ -69,7 +69,7 @@ public class BattleMenuManager : MonoBehaviour
 
         objetoPadreRecursosDisponibles.SetActive(false);
 
-        Accion.instance.inicializarListas();
+        //Accion.instance.inicializarListas();
     }
 
     // Metodo que guarda la ultima accion seleccionada
