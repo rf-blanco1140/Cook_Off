@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler {
+public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
+{
+
+    //---------------------------------------------------------------------------
+    // Variables
+    //---------------------------------------------------------------------------
 
     // Botón del cuál fue llamado este elemento.
     // Se necesita conocer para poder marcarlo como seleccionado en caso de
     // retroceder en la jerarquía.
-	public Button padre;
+    public Button padre;
 
     // Botón que marcaré como seleccionado al mostrar el panel
     // en el siguiente nivel de jerarquía. Sin esto no podré navegar al avanzar
@@ -30,17 +35,29 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler {
     // Sistema de eventos
 	EventSystem evSys;
 
-	// Adiciona el comando de siguiente al botón.
+    // Instacia del Battle Menu Manager
+    private BattleMenuManager instanciaBBManager;
+
+
+
+    //---------------------------------------------------------------------------
+    // Methods
+    //---------------------------------------------------------------------------
+
+    // Adiciona el comando de siguiente al botón.
     // Este botón coincide en nivel de jerarquía. Es el botón al que pertenece este script.
     // Inicializa el sistema de eventos, para poder marcar los botones como seleccionados
     // transversalmente en la jerarquía.
-	void Start () {
+    void Start ()
+    {
 		Button btn = GetComponent<Button>();
         if(btn != null)
         {
             btn.onClick.AddListener(Siguiente);
         }
         evSys = EventSystem.current;
+
+        instanciaBBManager = BattleMenuManager.instance;
     }
 
     // En este caso, identifica si debe retrocederse en la jerarquía
@@ -68,14 +85,23 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler {
     // Adicionalmente, establece al botón padre como el elemento seleccionado.
     void Anterior()
     {
-		if(activo && padre != null)
+        if(activo && instanciaBBManager.getAccionSeleccionada() != null)
+        {
+            evSys.SetSelectedGameObject(BattleMenuManager.instance.backToLastOpcionSelected());
+            if (panelMio != null)
+            {
+                panelMio.SetActive(false);
+            }
+        }
+
+		/*if(activo && padre != null)
 		{
 			evSys.SetSelectedGameObject(padre.gameObject);
 			if(panelMio != null)
             {
                 panelMio.SetActive(false);
             }
-		}
+		}*/
     }
 
     // Este método se llama al sombrearse un botón.
