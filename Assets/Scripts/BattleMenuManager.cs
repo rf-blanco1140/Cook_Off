@@ -57,7 +57,7 @@ public class BattleMenuManager : MonoBehaviour
     void Start()
     {
         objetoPadreRecursosDisponibles = GameObject.Find("Recursos");
-        objetoPadreRecursosDisponibles.SetActive(false);
+        
 
         ingredientesListosParaUsar = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
         listaTotalIngredientes = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
@@ -66,6 +66,10 @@ public class BattleMenuManager : MonoBehaviour
             ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
             listaTotalIngredientes[i] = ingredientesListosParaUsar[i];
         }
+
+        objetoPadreRecursosDisponibles.SetActive(false);
+
+        Accion.instance.inicializarListas();
     }
 
     // Metodo que guarda la ultima accion seleccionada

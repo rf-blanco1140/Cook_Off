@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - comando
+  - Cocinar
+  - Mezclar
+  - Cortar
+  - Servir
+  - Recurso
   layers:
   - Default
   - TransparentFX

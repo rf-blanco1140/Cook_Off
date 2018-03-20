@@ -51,10 +51,16 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
     void Start ()
     {
 		Button btn = GetComponent<Button>();
-        if(btn != null)
+
+        if(btn != null && tag != "Recurso")
         {
             btn.onClick.AddListener(Siguiente);
         }
+        else if(tag == "Recurso")
+        {
+            //this.GetComponent<ElementoRecursos>().manejarSeleccionBotonRecurso();
+        }
+
         evSys = EventSystem.current;
 
         instanciaBBManager = BattleMenuManager.instance;
