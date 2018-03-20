@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class POIngrediente : MonoBehaviour {
+public class POIngrediente : MonoBehaviour
+{
 
 	// Enumerador para los sabores que existen
 	public enum Sabor {Amargo, Dulce, Salado, Acido, Umami};
@@ -41,12 +42,14 @@ public class POIngrediente : MonoBehaviour {
 	// o del plato terminado, lista de ingredientes que lo componen
 	List<POIngrediente> componentes;
 	
-	void Start () {
+	void Start ()
+    {
 		estado = new POEstado();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 

@@ -18,10 +18,17 @@ public class BattleMenuManager : MonoBehaviour
     // Es el objeto que contiene los recursos disponibles en la escena del juego
     private GameObject objetoPadreRecursosDisponibles;
 
+    // Accion que se esta seleccionando
     private GameObject accionSeleccionada;
 
+    // Subaccion que se esta seleccionando
     private GameObject subAccionSeleccionada;
 
+    // Lista con todos los ingredientes, en cualquier estado
+    private GameObject[] listaTotalIngredientes;
+
+    // Lista de los ingredientes que se van a usar en la subaccion seleccionada
+    private GameObject[] ingredientesListosParaUsar;
 
     //---------------------------------------------------------------------------
     // Methods
@@ -51,6 +58,14 @@ public class BattleMenuManager : MonoBehaviour
     {
         objetoPadreRecursosDisponibles = GameObject.Find("Recursos");
         objetoPadreRecursosDisponibles.SetActive(false);
+
+        ingredientesListosParaUsar = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
+        listaTotalIngredientes = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
+        for (int i=0; i < objetoPadreRecursosDisponibles.transform.childCount; i++)
+        {
+            ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
+            listaTotalIngredientes[i] = ingredientesListosParaUsar[i];
+        }
     }
 
     // Metodo que guarda la ultima accion seleccionada
@@ -65,26 +80,46 @@ public class BattleMenuManager : MonoBehaviour
         subAccionSeleccionada = pSubAccionSeleccionada;
     }
 
+    /// <summary>
+    /// Retorna la ultima accion seleccionada de no haber accion retorna null
+    /// </summary>
+    /// <returns> la ultima accion activamente seleccionada, null si no se esta seleccinoando una accion o subaccion </returns>
     public GameObject getAccionSeleccionada()
     {
         return accionSeleccionada;
     }
 
+    /// <summary>
+    /// Retorna la ultima subaccion seleccionada de no haber accion retorna null
+    /// </summary>
+    /// <returns> la ultima accion activamente seleccionada, null si no se esta seleccinoando una subaccion </returns>
     public GameObject getSubAccionSeleccionada()
     {
         return subAccionSeleccionada;
     }
 
+    /// <summary>
+    /// Deja la accion seleccionada como null
+    /// esto indica que ene ste momento no se esta seleccionando una accion
+    /// </summary>
     public void limpiarAccionSeleccionada()
     {
         accionSeleccionada = null;
     }
 
+    /// <summary>
+    /// Deja la subaccion seleccionada como null
+    /// esto indica que ene ste momento no se esta seleccionando una subaccion
+    /// </summary>
     public void limpiarSubAccionSeleccionada()
     {
         subAccionSeleccionada = null;
     }
 
+    /// <summary>
+    /// Devuelve el marcador del menu de accion a el elemento previo del que salio el menu actual
+    /// </summary>
+    /// <returns> el GameObject previo del que salio el menu actual </returns>
     public GameObject backToLastOpcionSelected()
     {
         GameObject rtaElement = null;
@@ -101,6 +136,49 @@ public class BattleMenuManager : MonoBehaviour
         }
 
         return rtaElement;
+    }
+
+    /// <summary>
+    /// Define la lista de ingredientes que se van a mostrar en base a la accion que se va a realizar
+    /// Se llama cada vez que se selecciona la subaccion
+    /// </summary>
+    /// <param name="accionDefinida"> La accion que se va a realizar </param>
+    public void definirIngredientesUsables(string accionDefinida)
+    {
+        for (int i = 0; i < listaTotalIngredientes.Length; i++)
+        {
+            GameObject esteIngrediente = listaTotalIngredientes[i];
+
+            if (accionDefinida == "Cortar")
+            {
+                if (esteIngrediente.GetComponent<POEstado>().fueCortado() == false)
+                {
+                    ingredientesListosParaUsar[i] = esteIngrediente;
+                }
+            }
+            else if (accionDefinida == "Mezclar")
+            {
+                // Por ahora se asume que se muestran todos
+                ingredientesListosParaUsar[i] = esteIngrediente;
+            }
+            else if (accionDefinida == "cocinar")
+            {
+                if (esteIngrediente.GetComponent<POEstado>().fueCocinado() == false)
+                {
+                    ingredientesListosParaUsar[i] = esteIngrediente;
+                }
+            }
+            else if (accionDefinida == "Servir")
+            {
+                // Por ahora se asume que se muestran todos
+                ingredientesListosParaUsar[i] = esteIngrediente;
+            }
+        }
+    }
+
+    public GameObject[] getIngredeintesUsables()
+    {
+        return ingredientesListosParaUsar;
     }
 
 
