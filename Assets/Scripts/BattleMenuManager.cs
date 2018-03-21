@@ -134,6 +134,7 @@ public class BattleMenuManager : MonoBehaviour
     /// <returns> el GameObject previo del que salio el menu actual </returns>
     public GameObject backToLastOpcionSelected()
     {
+        Debug.Log("si entro peor no se para donde cogio");
         GameObject rtaElement = null;
 
         if(subAccionSeleccionada != null)
@@ -146,6 +147,7 @@ public class BattleMenuManager : MonoBehaviour
             rtaElement = accionSeleccionada;
             accionSeleccionada = null;
         }
+        Debug.Log(rtaElement.name);
 
         return rtaElement;
     }

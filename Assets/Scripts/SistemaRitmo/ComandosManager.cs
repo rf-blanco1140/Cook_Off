@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ComandosManager : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class ComandosManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         comandosActualesTotales = 0;
-        Debug.Log("el total es: " + comandosActualesTotales);
     }
 
     // Use this for initialization
@@ -46,42 +46,54 @@ public class ComandosManager : MonoBehaviour
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
-        // Pregunta comparando el nombre de la subaccion seleccionada con los IDs de las subacciones registradas
-        // dependiendo del match se ejecuta la subaccion particular
-        string nombreSubAccion = BattleMenuManager.instance.getSubaccionSeleccionada().name;
-
-        switch (nombreSubAccion)
+        int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
+        if (numIngredeintes>0)
         {
-            case "Juliana":
-                comandosCorteJuliana();
-                break;
-            case "Chips":
-                comandosCorteChips();
-                break;
-            case "Cuadros":
-                comandosCorteCuadros();
-                break;
-            case "A_Mano":
-                comandosCorteJuliana();
-                break;
-            case "Asar":
-                comandosCorteJuliana();
-                break;
-            case "Hervir":
-                comandosCorteJuliana();
-                break;
-            case "Hornear":
-                comandosCorteJuliana();
-                break;
-            case "Elegante":
-                comandosCorteJuliana();
-                break;
-            case "Divertido":
-                comandosCorteJuliana();
-                break;
-            case "Sencillo":
-                comandosCorteJuliana();
-                break;
+            // Pregunta comparando el nombre de la subaccion seleccionada con los IDs de las subacciones registradas
+            // dependiendo del match se ejecuta la subaccion particular
+            string nombreSubAccion = BattleMenuManager.instance.getSubaccionSeleccionada().name;
+
+            switch (nombreSubAccion)
+            {
+                case "Juliana":
+                    comandosCorteJuliana();
+                    break;
+                case "Chips":
+                    comandosCorteChips();
+                    break;
+                case "Cuadros":
+                    comandosCorteCuadros();
+                    break;
+                case "A_Mano":
+                    comandosCorteJuliana();
+                    break;
+                case "Asar":
+                    comandosCorteJuliana();
+                    break;
+                case "Hervir":
+                    comandosCorteJuliana();
+                    break;
+                case "Hornear":
+                    comandosCorteJuliana();
+                    break;
+                case "Elegante":
+                    comandosCorteJuliana();
+                    break;
+                case "Divertido":
+                    comandosCorteJuliana();
+                    break;
+                case "Sencillo":
+                    comandosCorteJuliana();
+                    break;
+            }
+            BattleMenuManager.instance.lanzarSistemaRitmo();
+            
+        }
+        else
+        {
+            Debug.Log("va por el camino correcto pero se distrae y se pdispara en el pie");
+
+            EventSystem.current.SetSelectedGameObject(BattleMenuManager.instance.backToLastOpcionSelected());
         }
 
     }
@@ -91,15 +103,22 @@ public class ComandosManager : MonoBehaviour
     // Agrega los comandos a la accion cortar en julianas
     public void comandosCorteJuliana()
     {
-        Comando[] newComandos = new Comando[5];
+        
 
-        for (int i=0; i<5; i++)
-        {
-            Comando temp = new Comando();
-            temp.configurar(KeyCode.UpArrow);
-            newComandos[i] = temp;
-        }
+        int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
+        int limiteFor = numIngredeintes * 5;
+        Comando[] newComandos = new Comando[limiteFor];
 
+        //for (int j=0; j < numIngredeintes; j++)
+        //{
+            for (int i = 0; i < limiteFor; i++)
+            {
+                Comando temp = new Comando();
+                temp.configurar(KeyCode.UpArrow);
+                newComandos[i] = temp;
+            }
+        //}
+        
         comandosActualesTotales = newComandos.Length;
         GeneradorComandos.instance.configurarComandos(newComandos);
     }

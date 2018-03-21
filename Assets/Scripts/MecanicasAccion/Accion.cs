@@ -51,6 +51,10 @@ public class Accion : MonoBehaviour
         posEnListaIngredeintesQueUsara = 0;
 	}
 
+    public int getNumeroDeIngredientes()
+    {
+        return posEnListaIngredeintesQueUsara;
+    }
 
     // Selecciona los ingredientes que se van a usar en cada accion
     public void agregarIngredeintesParaAccion(GameObject objetoIngredeinte)
