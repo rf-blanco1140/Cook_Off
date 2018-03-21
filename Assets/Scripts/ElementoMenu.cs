@@ -126,4 +126,9 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         activo = false;
     }
+
+    public void desactivarMenu()
+    {
+        panelMio.SetActive(false);
+    }
 }

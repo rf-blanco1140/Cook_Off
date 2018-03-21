@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvaluarComando : MonoBehaviour {
+public class EvaluarComando : MonoBehaviour
+{
 
 	// Comando que actualmente se encuentra en contacto con el indicador de tiempo
 	Comando comandoActual;
 
-	void Start () {
-		
+    private int numComandosDetectados;
+
+
+	void Start ()
+    {
+        numComandosDetectados = 0;
 	}
 	
 	// Evalúa si el usuario está oprimiendo un botón, y si este botón coincide
@@ -17,7 +22,8 @@ public class EvaluarComando : MonoBehaviour {
 		if(comandoActual != null && Input.GetKeyDown(comandoActual.darTecla()))
 		{
 			comandoActual.terminar();
-		}
+            ComandosManager.instance.revisarSiTerminarSistemaRitmo(numComandosDetectados);
+        }
 	}
 
 	// Si entra en contacto con un comando lo guarda para su evaluación en el Update
@@ -26,6 +32,7 @@ public class EvaluarComando : MonoBehaviour {
         if(collision.gameObject.tag == "comando")
         {
         	comandoActual = collision.gameObject.GetComponent<Comando>();
+            numComandosDetectados++;
         }
     }
 
@@ -36,6 +43,12 @@ public class EvaluarComando : MonoBehaviour {
         if(collision.gameObject.tag == "comando")
         {
         	comandoActual = null;
+            ComandosManager.instance.revisarSiTerminarSistemaRitmo(numComandosDetectados);
         }
+    }
+
+    private void OnEnable()
+    {
+        numComandosDetectados = 0;
     }
 }

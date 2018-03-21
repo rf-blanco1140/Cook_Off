@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BattleMenuManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class BattleMenuManager : MonoBehaviour
     // Lista de los ingredientes que se van a usar en la subaccion seleccionada
     private GameObject[] ingredientesListosParaUsar;
 
+    private GameObject peleaRitmoReference;
+
     //---------------------------------------------------------------------------
     // Methods
     //---------------------------------------------------------------------------
@@ -56,8 +59,12 @@ public class BattleMenuManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Disapear mouse cousor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         objetoPadreRecursosDisponibles = GameObject.Find("Recursos");
-        
+        peleaRitmoReference = GameObject.Find("PeleaRitmo");
 
         ingredientesListosParaUsar = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
         listaTotalIngredientes = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
@@ -68,6 +75,7 @@ public class BattleMenuManager : MonoBehaviour
         }
 
         objetoPadreRecursosDisponibles.SetActive(false);
+        peleaRitmoReference.SetActive(false);
 
         //Accion.instance.inicializarListas();
     }
@@ -202,6 +210,43 @@ public class BattleMenuManager : MonoBehaviour
             nuevoRecurso.AddComponent<Button>();
 
             textoNuevoRecurso.AddComponent<Text>();
+        }
+    }
+
+    public void lanzarSistemaRitmo()
+    {
+        peleaRitmoReference.SetActive(true);
+    }
+
+    public void terminarSistemaRitmo()
+    {
+        peleaRitmoReference.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(backToLastOpcionSelected());
+    }
+
+    // Method that manages the mouse click events so it dosn't fuck up everything else
+    private void onMouseClickReturnToOriginalPosition()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            //Debug.Log("Pressed left click.");
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            //Debug.Log("Pressed right click.");
+        }
+
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            Debug.Log("Pressed middle click.");
         }
     }
 
