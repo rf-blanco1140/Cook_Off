@@ -9,6 +9,9 @@ public class ComandosManager : MonoBehaviour
 
     private int comandosActualesTotales;
 
+    enum Subacciones { Juliana=0, Chips=1, Cuadros, A_Mano, Asar, Hervir, Hornear, Elegante, Divertido, Sencillo };
+
+
 
 
 
@@ -40,6 +43,51 @@ public class ComandosManager : MonoBehaviour
         
 	}
 
+    // Ejecuta el minijuego de ritmo de la subaccion correspondiente
+    public void ejecutarSubaccion()
+    {
+        // Pregunta comparando el nombre de la subaccion seleccionada con los IDs de las subacciones registradas
+        // dependiendo del match se ejecuta la subaccion particular
+        string nombreSubAccion = BattleMenuManager.instance.getSubaccionSeleccionada().name;
+
+        switch (nombreSubAccion)
+        {
+            case "Juliana":
+                comandosCorteJuliana();
+                break;
+            case "Chips":
+                comandosCorteChips();
+                break;
+            case "Cuadros":
+                comandosCorteCuadros();
+                break;
+            case "A_Mano":
+                comandosCorteJuliana();
+                break;
+            case "Asar":
+                comandosCorteJuliana();
+                break;
+            case "Hervir":
+                comandosCorteJuliana();
+                break;
+            case "Hornear":
+                comandosCorteJuliana();
+                break;
+            case "Elegante":
+                comandosCorteJuliana();
+                break;
+            case "Divertido":
+                comandosCorteJuliana();
+                break;
+            case "Sencillo":
+                comandosCorteJuliana();
+                break;
+        }
+
+    }
+
+    // ----------- Subacciones -----------------------------------
+
     // Agrega los comandos a la accion cortar en julianas
     public void comandosCorteJuliana()
     {
@@ -55,6 +103,60 @@ public class ComandosManager : MonoBehaviour
         comandosActualesTotales = newComandos.Length;
         GeneradorComandos.instance.configurarComandos(newComandos);
     }
+
+    // Agrega los comandos a la accion cortar en julianas
+    public void comandosCorteChips()
+    {
+        Comando[] newComandos = new Comando[6];
+
+        for (int i = 0; i < 6; i++)
+        {
+            Comando temp = new Comando();
+            temp.configurar(KeyCode.UpArrow);
+            newComandos[i] = temp;
+            i++;
+
+            temp = new Comando();
+            temp.configurar(KeyCode.RightArrow);
+            newComandos[i] = temp;
+            i++;
+
+            temp = new Comando();
+            temp.configurar(KeyCode.DownArrow);
+            newComandos[i] = temp;
+        }
+
+        comandosActualesTotales = newComandos.Length;
+        GeneradorComandos.instance.configurarComandos(newComandos);
+    }
+
+    // Agrega los comandos a la accion cortar en julianas
+    public void comandosCorteCuadros()
+    {
+        Comando[] newComandos = new Comando[4];
+
+
+            Comando temp = new Comando();
+            temp.configurar(KeyCode.LeftArrow);
+            newComandos[0] = temp;
+
+            temp = new Comando();
+            temp.configurar(KeyCode.UpArrow);
+            newComandos[1] = temp;
+
+            temp = new Comando();
+            temp.configurar(KeyCode.DownArrow);
+            newComandos[2] = temp;
+
+            temp = new Comando();
+            temp.configurar(KeyCode.RightArrow);
+            newComandos[3] = temp;
+
+
+        comandosActualesTotales = newComandos.Length;
+        GeneradorComandos.instance.configurarComandos(newComandos);
+    }
+
 
     public void revisarSiTerminarSistemaRitmo(int comandosDetectados)
     {

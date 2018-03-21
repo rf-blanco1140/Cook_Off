@@ -224,6 +224,11 @@ public class BattleMenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(backToLastOpcionSelected());
     }
 
+    public GameObject getSubaccionSeleccionada()
+    {
+        return subAccionSeleccionada;
+    }
+
     // Method that manages the mouse click events so it dosn't fuck up everything else
     private void onMouseClickReturnToOriginalPosition()
     {

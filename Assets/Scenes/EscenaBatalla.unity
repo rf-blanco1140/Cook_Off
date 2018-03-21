@@ -4449,7 +4449,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 921339518}
-        m_MethodName: comandosCorteJuliana
+        m_MethodName: ejecutarSubaccion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
