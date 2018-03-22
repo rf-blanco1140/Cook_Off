@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     // Enciclopedia donde se muestran todos los items en existencia
     private GameObject[] enciclopedia;
 
+    private GameObject menu;
 
 
     //---------------------------------------------------------------------------
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
     {
         inventario = new GameObject[100];
         enciclopedia = new GameObject[100];
+        menu = GameObject.Find("MenuPanel");
+        menu.SetActive(false);
     }
 	
     public GameObject[] getInventario()
@@ -60,5 +63,9 @@ public class GameManager : MonoBehaviour
         return enciclopedia;
     }
 
-
+    public void openMenu()
+    {
+        menu.SetActive(true);
+        menu.
+    }
 }

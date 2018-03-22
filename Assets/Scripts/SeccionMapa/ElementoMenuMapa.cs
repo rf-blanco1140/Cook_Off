@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,6 +38,10 @@ public class ElementoMenuMapa : MonoBehaviour
     // Instacia del Battle Menu Manager
     private BattleMenuManager instanciaBBManager;
 
+    private GameObject pointer;
+
+    public bool startSelected;
+
 
 
     //---------------------------------------------------------------------------
@@ -50,6 +54,9 @@ public class ElementoMenuMapa : MonoBehaviour
     // transversalmente en la jerarquía.
     void Start()
     {
+        pointer = transform.GetChild(1).gameObject;
+        pointer.SetActive(false);
+
         Button btn = GetComponent<Button>();
 
         if (btn != null && tag != "Recurso")
@@ -110,6 +117,8 @@ public class ElementoMenuMapa : MonoBehaviour
     public void OnSelect(BaseEventData eventData)
     {
         activo = true;
+        pointer.SetActive(true);
+
     }
 
     // Este método se llama al desmarcarse un botón.
@@ -117,10 +126,20 @@ public class ElementoMenuMapa : MonoBehaviour
     public void OnDeselect(BaseEventData eventData)
     {
         activo = false;
+        pointer.SetActive(false);
     }
 
     public void desactivarMenu()
     {
         panelMio.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if(startSelected)
+        {
+            this.GetComponent<Button>().Select();
+            evSys.SetSelectedGameObject();
+        }
     }
 }
