@@ -1,17 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class MapMenu : MonoBehaviour
+public class EnciclopediaManager : MonoBehaviour
 {
     //---------------------------------------------------------------------------
     // Variables
     //---------------------------------------------------------------------------
 
-    public GameObject firstSelectedButton;
-
-
+    public SimpleObjectPool buttonObjectPool;
 
 
     //---------------------------------------------------------------------------
@@ -27,19 +25,17 @@ public class MapMenu : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
+		
 	}
 
     private void OnEnable()
     {
-        Time.timeScale = 0;
-        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+        GameObject[] listado = GameManager.instance.getEnciclopedia();
+
+        for(int i=0; i < listado.Length; i++)
+        {
+            GameObject nuevoBoton = buttonObjectPool.GetObject();
+
+        }
     }
-
-    private void OnDisable()
-    {
-        Time.timeScale = 1;
-    }
-
-
 }

@@ -65,17 +65,15 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
         }
 
         evSys = EventSystem.current;
-
     }
 
     // En este caso, identifica si debe retrocederse en la jerarquía
     void Update()
     {
-        if (activo && Input.GetKeyDown(KeyCode.Backspace))
+        if (activo && Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown("return"))
         {
             Anterior();
         }
-
     }
 
     // Al estar activo el botón, avanza un paso en la jerarquía.
@@ -108,7 +106,6 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
             panelMio.SetActive(false);
             evSys.SetSelectedGameObject(null);
         }
-
     }
 
     // Este método se llama al sombrearse un botón.
@@ -117,8 +114,6 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         activo = true;
-        //pointer.SetActive(true);
-
     }
 
     // Este método se llama al desmarcarse un botón.

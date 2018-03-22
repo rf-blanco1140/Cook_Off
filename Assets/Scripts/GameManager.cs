@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     void Start ()
     {
         inventario = new GameObject[100];
-        enciclopedia = new GameObject[100];
+        enciclopedia = new GameObject[3];
     }
 	
     public GameObject[] getInventario()
@@ -62,5 +62,19 @@ public class GameManager : MonoBehaviour
         return enciclopedia;
     }
 
+    public void poblarEnciclopedia()
+    {
+        GameObject nuevoIngrediente = new GameObject();
+        nuevoIngrediente.name = "CarneAsada";
+        enciclopedia[0] = nuevoIngrediente;
+
+        nuevoIngrediente = new GameObject();
+        nuevoIngrediente.name = "Sal";
+        enciclopedia[1] = nuevoIngrediente;
+
+        nuevoIngrediente = new GameObject();
+        nuevoIngrediente.name = "Aceite";
+        enciclopedia[2] = nuevoIngrediente;
+    }
     
 }
