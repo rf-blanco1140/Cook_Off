@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ElementoMenuMapa : MonoBehaviour
+public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
 {
 
     //---------------------------------------------------------------------------
@@ -35,12 +35,9 @@ public class ElementoMenuMapa : MonoBehaviour
     // Sistema de eventos
     EventSystem evSys;
 
-    // Instacia del Battle Menu Manager
-    private BattleMenuManager instanciaBBManager;
-
-    private GameObject pointer;
-
     public bool startSelected;
+
+    private Button buttonComponent;
 
 
 
@@ -54,8 +51,7 @@ public class ElementoMenuMapa : MonoBehaviour
     // transversalmente en la jerarquía.
     void Start()
     {
-        pointer = transform.GetChild(1).gameObject;
-        pointer.SetActive(false);
+        buttonComponent = this.GetComponent<Button>();
 
         Button btn = GetComponent<Button>();
 
@@ -70,7 +66,6 @@ public class ElementoMenuMapa : MonoBehaviour
 
         evSys = EventSystem.current;
 
-        instanciaBBManager = BattleMenuManager.instance;
     }
 
     // En este caso, identifica si debe retrocederse en la jerarquía
@@ -80,6 +75,7 @@ public class ElementoMenuMapa : MonoBehaviour
         {
             Anterior();
         }
+
     }
 
     // Al estar activo el botón, avanza un paso en la jerarquía.
@@ -99,14 +95,18 @@ public class ElementoMenuMapa : MonoBehaviour
     // Vacia la lista de ingredeintes a suar
     void Anterior()
     {
-        if (activo && instanciaBBManager.getAccionSeleccionada() != null)
+        if (activo && MenuManager.instance.getUltimaOpcionSeleccionada() != null)
         {
-            Accion.instance.vaciarListaRecursosActuales();
             evSys.SetSelectedGameObject(BattleMenuManager.instance.backToLastOpcionSelected()); // Esto es lo que toca cambiar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (panelMio != null)
             {
                 panelMio.SetActive(false);
             }
+        }
+        else if(activo && MenuManager.instance.getUltimaOpcionSeleccionada() == null)
+        {
+            panelMio.SetActive(false);
+            evSys.SetSelectedGameObject(null);
         }
 
     }
@@ -117,7 +117,7 @@ public class ElementoMenuMapa : MonoBehaviour
     public void OnSelect(BaseEventData eventData)
     {
         activo = true;
-        pointer.SetActive(true);
+        //pointer.SetActive(true);
 
     }
 
@@ -126,7 +126,6 @@ public class ElementoMenuMapa : MonoBehaviour
     public void OnDeselect(BaseEventData eventData)
     {
         activo = false;
-        pointer.SetActive(false);
     }
 
     public void desactivarMenu()
@@ -134,12 +133,31 @@ public class ElementoMenuMapa : MonoBehaviour
         panelMio.SetActive(false);
     }
 
+    // Aqui se asegura que se seleccione el primer el emento de menu
+    // Debido a un bug de UNity requiere de una coorutina para funcionar
+    // -------------------------------------------DEJAR JUNTOS--------------------------------
     private void OnEnable()
     {
-        if(startSelected)
+        if(buttonComponent == null)
         {
-            this.GetComponent<Button>().Select();
-            evSys.SetSelectedGameObject();
+            buttonComponent = this.GetComponent<Button>();
+        }
+
+        if(EventSystem.current.currentSelectedGameObject != null)
+        {
+            if (buttonComponent.spriteState.highlightedSprite == false && EventSystem.current.currentSelectedGameObject.name == "Inventario")
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                StartCoroutine(waitToSelect());
+            }
         }
     }
+
+    // Corrutina apra que se pueda seleccionar el primer elemento apenas se abre el menu
+    public IEnumerator waitToSelect()
+    {
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(this.gameObject);
+    }
+    //---------------------------------------HASTA AQUI------------------------------------------
 }
