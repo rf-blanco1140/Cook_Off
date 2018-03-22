@@ -51,9 +51,6 @@ public class BattleMenuManager : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
-
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
@@ -215,17 +212,20 @@ public class BattleMenuManager : MonoBehaviour
         }
     }
 
+    // Activa el sistema de ritmo en pantalla para que corra los comandos definidos previamente
     public void lanzarSistemaRitmo()
     {
         peleaRitmoReference.SetActive(true);
     }
 
+    // Desactiva el sistema de ritmo y vuelve a la ultima accion seleccionada
     public void terminarSistemaRitmo()
     {
         peleaRitmoReference.SetActive(false);
         EventSystem.current.SetSelectedGameObject(backToLastOpcionSelected());
     }
 
+    // Devuelve la subaccion que se ha seleccioando
     public GameObject getSubaccionSeleccionada()
     {
         return subAccionSeleccionada;

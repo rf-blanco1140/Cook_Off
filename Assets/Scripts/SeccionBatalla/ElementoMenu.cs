@@ -102,14 +102,6 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
             }
         }
 
-		/*if(activo && padre != null)
-		{
-			evSys.SetSelectedGameObject(padre.gameObject);
-			if(panelMio != null)
-            {
-                panelMio.SetActive(false);
-            }
-		}*/
     }
 
     // Este método se llama al sombrearse un botón.

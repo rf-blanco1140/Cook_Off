@@ -51,6 +51,7 @@ public class Accion : MonoBehaviour
         posEnListaIngredeintesQueUsara = 0;
 	}
 
+    // Devuelve el numero de ingredientes que se van a ausar en la subaccion
     public int getNumeroDeIngredientes()
     {
         return posEnListaIngredeintesQueUsara;
