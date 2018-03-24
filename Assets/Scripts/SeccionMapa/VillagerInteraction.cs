@@ -8,6 +8,14 @@ public class VillagerInteraction : MonoBehaviour {
 
 	public bool hasQuest;
 
+    public bool hasQuestion;
+
+    public string theQuestion;
+
+    public string noAnswer;
+
+    public string yesAnswer;
+
 	public string theQuest;
 
 	public string theItem; 
@@ -39,7 +47,11 @@ public class VillagerInteraction : MonoBehaviour {
 
     public string interactuar()
     {
-    	if(hasItem)
+    	if(hasQuestion)
+        {
+            return theQuestion;
+        }
+        else if(hasItem)
     	{
     		hasItem = false;
     		return theItem;
@@ -53,5 +65,18 @@ public class VillagerInteraction : MonoBehaviour {
     	{
     		return defaultText;
     	}
+    }
+
+    public string responder(bool respuesta)
+    {
+        if(respuesta)
+        {
+            hasQuestion = false;
+            return yesAnswer;
+        }
+        else
+        {
+            return noAnswer;
+        }
     }
 }

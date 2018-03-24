@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour {
 
-	Text texto;
+	public delegate void Responder();
+    public static event Responder ResponderAldeano;
+
+	public Text texto;
+
+	bool respuesta;
 	// Use this for initialization
-	void Start () {
+	void OnAwake () {
 		texto = GetComponentInChildren<Text>();
 	}
 	
@@ -19,5 +24,22 @@ public class TextManager : MonoBehaviour {
 	public void setTexto(string nuevo)
 	{
 		texto.text = nuevo;
+	}
+
+	public void respuestaAfirmativa()
+	{
+		respuesta = true;
+		ResponderAldeano();
+	}
+
+	public void respuestaNegativa()
+	{
+		respuesta = false;
+		ResponderAldeano();
+	}
+
+	public bool darRespuesta()
+	{
+		return respuesta;
 	}
 }
