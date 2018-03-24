@@ -23,10 +23,6 @@ public class GeneradorComandos : MonoBehaviour
 	// Distancia temporal entre comandos en la secuencia
 	public float delayComandos = 0.5f;
 
-
-
-
-
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -73,6 +69,7 @@ public class GeneradorComandos : MonoBehaviour
 			actual.empezar();
 			yield return new WaitForSeconds(delayComandos);		
 		}
+		yield return new WaitForSeconds(3f);		
 	}
 
     void OnEnable()

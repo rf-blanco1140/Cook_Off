@@ -86,6 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254769ffe02d74972baacbf5356be661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tecla: 0
+  texto: {fileID: 114962621687045020}
 --- !u!114 &114868505477509668
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Comando : MonoBehaviour {
 
 	// Tecla asociada al comando
-	KeyCode tecla;
+	public KeyCode tecla;
 
 	// Pool al que pertenece. Utiliza este objeto al momento de haber servido su propósito
 	SimpleObjectPool pool;
@@ -19,15 +20,38 @@ public class Comando : MonoBehaviour {
 	// Velocidad a la cual ejecuta la translación
 	float velocidad = 150f;
 
+	public Text texto;
+
 	// No se usa por ahora :P
 	void Start () {
-		
+		texto = GetComponentInChildren<Text>();
 	}
 
 	// Se le asigna la tecla asociada por parámetro
 	public void configurar(KeyCode pTecla)
 	{
 		tecla = pTecla;
+		if(texto != null)
+		{
+			Debug.Log(pTecla == KeyCode.UpArrow);
+			if(pTecla == KeyCode.UpArrow)
+			{
+				texto.text = "^";
+			}
+			else if(pTecla == KeyCode.DownArrow)
+			{
+				texto.text = "v";
+			}
+			else if(pTecla == KeyCode.RightArrow)
+			{
+				texto.text = ">";
+			}
+			else if(pTecla == KeyCode.LeftArrow)
+			{
+				texto.text = "<";
+			}
+				
+		}
 	}
 
 	// Se configura el pool al que pertenece, para su momento de desaparecer
