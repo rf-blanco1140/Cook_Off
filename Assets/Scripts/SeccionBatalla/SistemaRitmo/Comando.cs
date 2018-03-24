@@ -18,14 +18,20 @@ public class Comando : MonoBehaviour {
 	Vector3 fin;
 
 	// Velocidad a la cual ejecuta la translación
-	float velocidad = 150f;
+	float velocidad;
 
 	public Text texto;
 
 	// No se usa por ahora :P
 	void Start () {
-		texto = GetComponentInChildren<Text>();
+        velocidad = 150f;
+        texto = GetComponentInChildren<Text>();
 	}
+
+    /*public Comando()
+    {
+
+    }*/
 
 	// Se le asigna la tecla asociada por parámetro
 	public void configurar(KeyCode pTecla)
@@ -33,7 +39,6 @@ public class Comando : MonoBehaviour {
 		tecla = pTecla;
 		if(texto != null)
 		{
-			Debug.Log(pTecla == KeyCode.UpArrow);
 			if(pTecla == KeyCode.UpArrow)
 			{
 				texto.text = "^";

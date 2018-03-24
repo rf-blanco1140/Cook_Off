@@ -35,7 +35,6 @@ public class EnciclopediaManager : MonoBehaviour
         for(int i=0; i < listado.Length; i++)
         {
             GameObject nuevoBoton = buttonObjectPool.GetObject();
-
         }
     }
 }

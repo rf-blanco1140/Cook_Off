@@ -11,10 +11,6 @@ public class Accion : MonoBehaviour
 
     public static Accion instance = null;
 
-    private bool estaSeleccionada;
-
-    private BattleMenuManager instanciaBMManager;
-
     private GameObject[] ingredeintesQueUsara = new GameObject[100];
 
     private int posEnListaIngredeintesQueUsara;
@@ -38,16 +34,11 @@ public class Accion : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
-
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
     void Start ()
     {
-        estaSeleccionada = false;
-        instanciaBMManager = BattleMenuManager.instance;
         posEnListaIngredeintesQueUsara = 0;
 	}
 

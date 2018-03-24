@@ -10,7 +10,9 @@ public class ComandosManager : MonoBehaviour
 
     private int comandosActualesTotales;
 
-    enum Subacciones { Juliana=0, Chips=1, Cuadros, A_Mano, Asar, Hervir, Hornear, Elegante, Divertido, Sencillo };
+    private GameObject comandoObjetc;
+
+    private Comando nuevoComando;
 
 
 
@@ -31,17 +33,18 @@ public class ComandosManager : MonoBehaviour
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
 
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
-
         comandosActualesTotales = 0;
+
+        comandoObjetc = new GameObject();
+        comandoObjetc.AddComponent<Comando>();
+        nuevoComando = comandoObjetc.GetComponent<Comando>();
     }
 
     // Use this for initialization
     void Start ()
     {
-        
-	}
+        //nuevoComando = new Comando();
+    }
 
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
@@ -103,8 +106,6 @@ public class ComandosManager : MonoBehaviour
     // Agrega los comandos a la accion cortar en julianas
     public void comandosCorteJuliana()
     {
-        
-
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         int limiteFor = numIngredeintes * 5;
         Comando[] newComandos = new Comando[limiteFor];
@@ -113,9 +114,8 @@ public class ComandosManager : MonoBehaviour
         //{
             for (int i = 0; i < limiteFor; i++)
             {
-                Comando temp = new Comando();
-                temp.configurar(KeyCode.UpArrow);
-                newComandos[i] = temp;
+                nuevoComando.configurar(KeyCode.UpArrow);
+                newComandos[i] = nuevoComando;
             }
         //}
         
@@ -130,19 +130,16 @@ public class ComandosManager : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            Comando temp = new Comando();
-            temp.configurar(KeyCode.UpArrow);
-            newComandos[i] = temp;
+            nuevoComando.configurar(KeyCode.UpArrow);
+            newComandos[i] = nuevoComando;
             i++;
 
-            temp = new Comando();
-            temp.configurar(KeyCode.RightArrow);
-            newComandos[i] = temp;
+            nuevoComando.configurar(KeyCode.RightArrow);
+            newComandos[i] = nuevoComando;
             i++;
 
-            temp = new Comando();
-            temp.configurar(KeyCode.DownArrow);
-            newComandos[i] = temp;
+            nuevoComando.configurar(KeyCode.DownArrow);
+            newComandos[i] = nuevoComando;
         }
 
         comandosActualesTotales = newComandos.Length;
@@ -155,21 +152,17 @@ public class ComandosManager : MonoBehaviour
         Comando[] newComandos = new Comando[4];
 
 
-            Comando temp = new Comando();
-            temp.configurar(KeyCode.LeftArrow);
-            newComandos[0] = temp;
+        nuevoComando.configurar(KeyCode.LeftArrow);
+            newComandos[0] = nuevoComando;
 
-            temp = new Comando();
-            temp.configurar(KeyCode.UpArrow);
-            newComandos[1] = temp;
+        nuevoComando.configurar(KeyCode.UpArrow);
+            newComandos[1] = nuevoComando;
 
-            temp = new Comando();
-            temp.configurar(KeyCode.DownArrow);
-            newComandos[2] = temp;
+        nuevoComando.configurar(KeyCode.DownArrow);
+            newComandos[2] = nuevoComando;
 
-            temp = new Comando();
-            temp.configurar(KeyCode.RightArrow);
-            newComandos[3] = temp;
+        nuevoComando.configurar(KeyCode.RightArrow);
+            newComandos[3] = nuevoComando;
 
 
         comandosActualesTotales = newComandos.Length;

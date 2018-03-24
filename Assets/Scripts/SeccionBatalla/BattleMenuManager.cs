@@ -221,6 +221,7 @@ public class BattleMenuManager : MonoBehaviour
     public void terminarSistemaRitmo()
     {
         peleaRitmoReference.SetActive(false);
+        Accion.instance.vaciarListaRecursosActuales();
         EventSystem.current.SetSelectedGameObject(backToLastOpcionSelected());
     }
 
