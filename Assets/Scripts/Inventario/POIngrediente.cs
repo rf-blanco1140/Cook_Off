@@ -5,6 +5,9 @@ using UnityEngine;
 public class POIngrediente : MonoBehaviour
 {
 
+    // Nombre del ingrediente
+    private string nombre;
+
 	// Enumerador para los sabores que existen
 	public enum Sabor {Amargo, Dulce, Salado, Acido, Umami};
 
