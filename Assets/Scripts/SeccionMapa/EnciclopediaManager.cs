@@ -13,7 +13,7 @@ public class EnciclopediaManager : MonoBehaviour
 
     public SimpleObjectPool buttonObjectPool;
 
-    public List<string> listaIngredientes;
+    public List<POIngrediente> listaIngredientes;
 
     public Transform contentPanel;
 
@@ -34,6 +34,7 @@ public class EnciclopediaManager : MonoBehaviour
 
     private void OnEnable()
     {
+        listaIngredientes = GameManager.instance.getEnciclopedia();
         RemoveButtons();
         addButtons();
     }
@@ -54,14 +55,16 @@ public class EnciclopediaManager : MonoBehaviour
     {
         for(int i=0; i<listaIngredientes.Count; i++)
         {
-            string nombreIngrediente = listaIngredientes[i];
+
+            Debug.Log("nuevo nombre es: " + listaIngredientes[i].getNombre());
+            POIngrediente esteIngredeinte = listaIngredientes[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
 
             POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
-            ingreStats.configurarSabor(Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10));
-            ingreStats.configurarTextura(false, true, false, true);
-            ingreStats.definirNombre(nombreIngrediente);
+            ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
+            ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
+            ingreStats.definirNombre(esteIngredeinte.getNombre());
 
             BotonIngrediente nuevoElementoMenu = newButton.GetComponent<BotonIngrediente>();
             nuevoElementoMenu.inicializarValoresBoton(newButton);

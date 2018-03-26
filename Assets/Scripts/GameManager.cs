@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] inventario;
 
     // Enciclopedia donde se muestran todos los items en existencia
-    private GameObject[] enciclopedia;
+    private List<POIngrediente> enciclopedia;
 
 
 
@@ -43,13 +43,16 @@ public class GameManager : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+
+        IngredientLoader loader = GameObject.Find("Overworld").GetComponent<IngredientLoader>();
+        enciclopedia = loader.setUpAndRun();
     }
 
     // Use this for initialization
     void Start ()
     {
         inventario = new GameObject[100];
-        enciclopedia = new GameObject[3];
+        //enciclopedia = new GameObject[3];
     }
 	
     public GameObject[] getInventario()
@@ -57,14 +60,14 @@ public class GameManager : MonoBehaviour
         return inventario;
     }
 
-    public GameObject[] getEnciclopedia()
+    public List<POIngrediente> getEnciclopedia()
     {
         return enciclopedia;
     }
 
     public void poblarEnciclopedia()
     {
-        GameObject nuevoIngrediente = new GameObject();
+       /* GameObject nuevoIngrediente = new GameObject();
         nuevoIngrediente.name = "CarneAsada";
         enciclopedia[0] = nuevoIngrediente;
 
@@ -74,7 +77,7 @@ public class GameManager : MonoBehaviour
 
         nuevoIngrediente = new GameObject();
         nuevoIngrediente.name = "Aceite";
-        enciclopedia[2] = nuevoIngrediente;
+        enciclopedia[2] = nuevoIngrediente;*/
     }
     
 }

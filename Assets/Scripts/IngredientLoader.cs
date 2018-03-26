@@ -13,11 +13,19 @@ public class IngredientLoader : MonoBehaviour
 
 	void Start()
 	{
-        poolIngredientes = GetComponent<SimpleObjectPool>();
-		LeerData();
+        //poolIngredientes = GetComponent<SimpleObjectPool>();
+		//LeerData();
 	}
     
-    void LeerData()
+    public List<POIngrediente> setUpAndRun()
+    {
+        poolIngredientes = GameObject.Find("ButtonObjectPool").GetComponent<SimpleObjectPool>();
+        LeerData();
+
+        return ingredientes;
+    }
+
+    public void LeerData()
     {
         string path = "Assets/Resources/ingredients.txt";
 

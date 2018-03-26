@@ -731,6 +731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533635709}
   - component: {fileID: 533635710}
+  - component: {fileID: 533635711}
   m_Layer: 0
   m_Name: Overworld
   m_TagString: Untagged
@@ -767,6 +768,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d63bb172892b3745b1f0414884f6bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &533635711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533635708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e867828c00c4d29b2d62cedb4701e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientes: []
 --- !u!1 &603552062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,8 +1088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonObjectPool: {fileID: 1490509451}
   listaIngredientes:
-  - Cebolllin
-  - Hormigas Culonas
+  - {fileID: 0}
+  - {fileID: 0}
   contentPanel: {fileID: 801959168}
   botonEnciclopedia: {fileID: 1966759854}
 --- !u!1 &827544020
