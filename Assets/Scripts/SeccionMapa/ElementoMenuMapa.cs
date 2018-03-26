@@ -1,4 +1,4 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,8 +39,6 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
 
     private Button buttonComponent;
 
-    public Text nombreBoton;
-
 
 
     //---------------------------------------------------------------------------
@@ -67,12 +65,6 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
         }
 
         evSys = EventSystem.current;
-    }
-
-    // Agrega los valores pasados al boton
-    public void inicializarValoresBoton(string btnNombre)
-    {
-        nombreBoton.text = btnNombre;
     }
 
     // En este caso, identifica si debe retrocederse en la jerarquía

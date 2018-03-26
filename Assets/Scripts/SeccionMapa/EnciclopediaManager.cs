@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class EnciclopediaManager : MonoBehaviour
@@ -16,6 +17,10 @@ public class EnciclopediaManager : MonoBehaviour
 
     public Transform contentPanel;
 
+    public Button botonEnciclopedia;
+
+    private GameObject primerBotonEnLista;
+
 
     //---------------------------------------------------------------------------
     // Methods
@@ -24,19 +29,27 @@ public class EnciclopediaManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        addButtons();
+        //addButtons();
 	}
 
     private void OnEnable()
     {
-        /*GameObject[] listado = GameManager.instance.getEnciclopedia();
-
-        for(int i=0; i < listado.Length; i++)
-        {
-            GameObject nuevoBoton = buttonObjectPool.GetObject();
-        }*/
+        RemoveButtons();
+        addButtons();
     }
 
+    private void RemoveButtons()
+    {
+        while (contentPanel.childCount > 0)
+        {
+            GameObject toRemove = transform.GetChild(0).gameObject;
+            buttonObjectPool.ReturnObject(toRemove);
+        }
+    }
+
+    /// <summary>
+    /// Agrega los ingredientes posibles al panel del la enciclopedia en forma de botones
+    /// </summary>
     public void addButtons()
     {
         for(int i=0; i<listaIngredientes.Count; i++)
@@ -45,13 +58,38 @@ public class EnciclopediaManager : MonoBehaviour
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
 
-            ElementoMenuMapa nuevoElementoMenu = newButton.GetComponent<ElementoMenuMapa>();
-            nuevoElementoMenu.inicializarValoresBoton(nombreIngrediente);
+            POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
+            ingreStats.configurarSabor(Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10), Random.Range(1, 10));
+            ingreStats.configurarTextura(false, true, false, true);
+            ingreStats.definirNombre(nombreIngrediente);
+
+            BotonIngrediente nuevoElementoMenu = newButton.GetComponent<BotonIngrediente>();
+            nuevoElementoMenu.inicializarValoresBoton(newButton);
+
+            setUpElementoMenu(newButton);
+            if (primerBotonEnLista==null) { primerBotonEnLista = newButton; }
         }
+
+        // Selecciona el primer boton
+        EventSystem.current.SetSelectedGameObject(null);
+        StartCoroutine(waitToSelect());
     }
 
-    public void getListaIngredientes()
+    // iniciliza el componente ElementoMenuMapa de los botones ne la enciclopedia
+    public void setUpElementoMenu(GameObject nuevoBoton)
     {
-        //listaIngredientes
+        ElementoMenuMapa esteElementomenu = nuevoBoton.GetComponent<ElementoMenuMapa>();
+        esteElementomenu.padre = botonEnciclopedia;
+        esteElementomenu.panelMio = GameObject.Find("ListaCompletaIngredientes");
+    }
+
+
+
+    //------------------------------------------------------------------------------------------
+    // Corrutina para que se pueda seleccionar el primer boton apenas se abre el menu
+    public IEnumerator waitToSelect()
+    {
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(primerBotonEnLista);
     }
 }

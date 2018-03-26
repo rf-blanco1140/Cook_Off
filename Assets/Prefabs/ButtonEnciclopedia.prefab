@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114424784725050558}
   - component: {fileID: 114169953926720242}
   - component: {fileID: 114395291577159532}
+  - component: {fileID: 114764890661687078}
+  - component: {fileID: 114749955457499616}
   m_Layer: 0
   m_Name: ButtonEnciclopedia
   m_TagString: Untagged
@@ -116,7 +118,6 @@ MonoBehaviour:
   panelHijo: {fileID: 0}
   panelMio: {fileID: 0}
   startSelected: 0
-  nombreBoton: {fileID: 114136225166289804}
 --- !u!114 &114424784725050558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +186,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114749955457499616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123802977114190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62cd33b337afcea4d9901d50eeb4f500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreBoton: {fileID: 114136225166289804}
+--- !u!114 &114764890661687078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123802977114190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537aa559672a54fc1a7ea7de274316d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222637838041427532
 CanvasRenderer:
   m_ObjectHideFlags: 1

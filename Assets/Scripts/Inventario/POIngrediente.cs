@@ -49,12 +49,18 @@ public class POIngrediente : MonoBehaviour
     {
 		estado = new POEstado();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Define el nombre del ingrediente
+    public void definirNombre(string pNombre)
     {
-		
-	}
+        nombre = pNombre;
+    }
+
+    // Retorna el nombre del ingrediente
+    public string getNombre()
+    {
+        return nombre;
+    }
 
 	// Retorna el valor numérico del sabor especificado. En caso de tratarse de una mezcla,
 	// retorna la suma del sabor de todos los ingredientes que componen la mezcla.
@@ -62,10 +68,13 @@ public class POIngrediente : MonoBehaviour
 	{
 		float cantidadSabor = 0;
 		
-		foreach(POIngrediente ingrediente in componentes)
-		{
-			cantidadSabor += ingrediente.darSabor(pSabor);
-		}			
+        if(componentes!= null)
+        {
+            foreach (POIngrediente ingrediente in componentes)
+            {
+                cantidadSabor += ingrediente.darSabor(pSabor);
+            }
+        }
 		
 		switch(pSabor)
 		{

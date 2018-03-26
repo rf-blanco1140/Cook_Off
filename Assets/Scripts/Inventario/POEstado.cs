@@ -82,4 +82,10 @@ public class POEstado : MonoBehaviour
 	{
 		servido = true;
 	}
+
+    // Metodo que indica si fue o no servido
+    public bool fueServido()
+    {
+        return servido;
+    }
 }
