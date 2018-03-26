@@ -31,6 +31,14 @@ public class BotonIngrediente : MonoBehaviour, ISelectHandler
     {
         GameObject dulceObject = GameObject.Find("Dulce");
         dulce = dulceObject.GetComponent<Text>();
+        salado = GameObject.Find("Salado").GetComponent<Text>();
+        amargo = GameObject.Find("Amargo").GetComponent<Text>();
+        acido = GameObject.Find("Acido").GetComponent<Text>();
+        umami = GameObject.Find("Umami").GetComponent<Text>();
+        crujiente = GameObject.Find("Crujiente").GetComponent<Text>();
+        humedo = GameObject.Find("Humedo").GetComponent<Text>();
+        seco = GameObject.Find("Seco").GetComponent<Text>();
+        suave = GameObject.Find("Suave").GetComponent<Text>();
     }
 
     // Agrega los valores pasados al boton
@@ -55,13 +63,31 @@ public class BotonIngrediente : MonoBehaviour, ISelectHandler
     public void agregarStatsEnPanel()
     {
         //Agrega todos los valores de las caracteristicas al texto en inetrfaz
+        //Sabores
         dulce.text += " " + ingredienteStats.darSabor(POIngrediente.Sabor.Dulce);
+        salado.text += " " + ingredienteStats.darSabor(POIngrediente.Sabor.Salado);
+        amargo.text += " " + ingredienteStats.darSabor(POIngrediente.Sabor.Amargo);
+        acido.text += " " + ingredienteStats.darSabor(POIngrediente.Sabor.Acido);
+        umami.text += " " + ingredienteStats.darSabor(POIngrediente.Sabor.Umami);
+        // Texturas
+        crujiente.text += " " + ingredienteStats.darTextura(POIngrediente.Textura.Crujiente);
+        suave.text += " " + ingredienteStats.darTextura(POIngrediente.Textura.Suave);
+        humedo.text += " " + ingredienteStats.darTextura(POIngrediente.Textura.Humedo);
+        seco.text += " " + ingredienteStats.darTextura(POIngrediente.Textura.Seco);
     }
 
     // Limpia la info escrita en el panel de stats
     public void limpiarPanelStats()
     {
         dulce.text = "Dulce:";
+        salado.text = "Salado:";
+        amargo.text = "Amargo:";
+        acido.text = "Acido:";
+        umami.text = "Umami:";
+        crujiente.text = "Crujiente:";
+        suave.text = "Suave:";
+        humedo.text = "Humedo:";
+        seco.text = "Seco:";
     }
 
     public void OnSelect(BaseEventData eventData)

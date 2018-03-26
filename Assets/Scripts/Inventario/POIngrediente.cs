@@ -126,10 +126,14 @@ public class POIngrediente : MonoBehaviour
 				break;
 		}	
 
-		foreach(POIngrediente ingrediente in componentes)
-		{
-			laTextura = laTextura || ingrediente.darTextura(pTextura);
-		}			
+        if(componentes != null)
+        {
+            foreach (POIngrediente ingrediente in componentes)
+            {
+                laTextura = laTextura || ingrediente.darTextura(pTextura);
+            }
+        }
+					
 		return laTextura;
 	}
 
