@@ -94,8 +94,6 @@ public class ComandosManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("va por el camino correcto pero se distrae y se pdispara en el pie");
-
             EventSystem.current.SetSelectedGameObject(BattleMenuManager.instance.backToLastOpcionSelected());
         }
 

@@ -143,7 +143,6 @@ public class BattleMenuManager : MonoBehaviour
             rtaElement = accionSeleccionada;
             accionSeleccionada = null;
         }
-        Debug.Log(rtaElement.name);
 
         return rtaElement;
     }
@@ -253,7 +252,7 @@ public class BattleMenuManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
-            Debug.Log("Pressed middle click.");
+            //.Log("Pressed middle click.");
         }
     }
 

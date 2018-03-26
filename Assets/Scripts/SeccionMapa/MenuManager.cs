@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
     // Menu que se puede sacar cuenado se esta en el mapa
     private GameObject inMapMenu;
 
+    private GameObject enciclopediaMenu;
+
     // Ultima accion seleccionada en el menu
     private GameObject ultimaOpcionSeleccionada;
 
@@ -43,6 +45,8 @@ public class MenuManager : MonoBehaviour
     {
         inMapMenu = GameObject.Find("MenuPanel");
         inMapMenu.SetActive(false);
+        enciclopediaMenu = GameObject.Find("ListaCompletaIngredientes");
+        enciclopediaMenu.SetActive(false);
     }
 	
 	// Update is called once per frame

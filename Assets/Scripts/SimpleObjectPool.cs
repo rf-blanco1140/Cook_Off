@@ -54,11 +54,19 @@ public class SimpleObjectPool : MonoBehaviour
             inactiveInstances.Push(toReturn);
         }
         // otherwise, just destroy it
-        else
+        else if(pooledObject==null)
+        {
+            Debug.Log("es nulo");
+        }
+        else if(pooledObject.pool != this)
+        {
+            Debug.Log("no es este el padre");
+        }
+        /*else
         {
             Debug.LogWarning(toReturn.name + " was returned to a pool it wasn't spawned from! Destroying.");
             Destroy(toReturn);
-        }
+        }*/
     }
 }
 

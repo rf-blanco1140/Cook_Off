@@ -83,8 +83,8 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
         if (activo)
         {
             panelHijo.SetActive(true);
-            hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
-            evSys.SetSelectedGameObject(hijo.gameObject);
+            //hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
+            //evSys.SetSelectedGameObject(hijo.gameObject);
         }
     }
 
@@ -126,6 +126,11 @@ public class ElementoMenuMapa : MonoBehaviour, ISelectHandler
     public void desactivarMenu()
     {
         panelMio.SetActive(false);
+    }
+
+    void TaskOnClick()
+    {
+        Debug.Log("You have clicked the button!");
     }
 
     // Aqui se asegura que se seleccione el primer el emento de menu
