@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.93, y: 260}
+  m_AnchoredPosition: {x: -3.9300003, y: 327.82574}
   m_SizeDelta: {x: 192.33, y: 49.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332976252
@@ -1087,9 +1087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonObjectPool: {fileID: 1490509451}
-  listaIngredientes:
-  - {fileID: 0}
-  - {fileID: 0}
+  listaIngredientes: []
   contentPanel: {fileID: 801959168}
   botonEnciclopedia: {fileID: 1966759854}
 --- !u!1 &827544020
@@ -3495,7 +3493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.9299316, y: 192.72356}
+  m_AnchoredPosition: {x: -3.9299316, y: 260.54932}
   m_SizeDelta: {x: 192.33, y: 49.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966759854

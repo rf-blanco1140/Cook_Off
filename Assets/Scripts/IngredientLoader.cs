@@ -51,13 +51,16 @@ public class IngredientLoader : MonoBehaviour
             bool suave = atributos[18].Equals("true");
 
             POIngrediente temp = poolIngredientes.GetObject().GetComponent<POIngrediente>();
+            temp.transform.parent = gameObject.transform;
             temp.definirNombre(nombre);
             temp.configurarSabor(dulce, salado, amargo, acido, umami);
             temp.configurarTextura(suave, crujiente, humedo, seco);
             ingredientes.Add(temp);
-            poolIngredientes.ReturnObject(temp.gameObject);
+            Debug.Log("valor es: " + ingredientes[0].getNombre());
             lineaActual = reader.ReadLine();
         }
+        Debug.Log("valor X es: " + ingredientes[0].getNombre());
+        Debug.Log("valor Y es: " + ingredientes[1].getNombre());
         reader.Close();
     }
 
