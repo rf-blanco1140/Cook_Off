@@ -56,11 +56,8 @@ public class IngredientLoader : MonoBehaviour
             temp.configurarSabor(dulce, salado, amargo, acido, umami);
             temp.configurarTextura(suave, crujiente, humedo, seco);
             ingredientes.Add(temp);
-            Debug.Log("valor es: " + ingredientes[0].getNombre());
             lineaActual = reader.ReadLine();
         }
-        Debug.Log("valor X es: " + ingredientes[0].getNombre());
-        Debug.Log("valor Y es: " + ingredientes[1].getNombre());
         reader.Close();
     }
 

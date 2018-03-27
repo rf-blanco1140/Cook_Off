@@ -55,8 +55,6 @@ public class EnciclopediaManager : MonoBehaviour
     {
         for(int i=0; i<listaIngredientes.Count; i++)
         {
-
-            Debug.Log("nuevo nombre es: " + listaIngredientes[i].getNombre());
             POIngrediente esteIngredeinte = listaIngredientes[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
@@ -70,10 +68,11 @@ public class EnciclopediaManager : MonoBehaviour
             nuevoElementoMenu.inicializarValoresBoton(newButton);
 
             setUpElementoMenu(newButton);
-            if (primerBotonEnLista==null) { primerBotonEnLista = newButton; }
+
         }
 
         // Selecciona el primer boton
+        primerBotonEnLista = contentPanel.GetChild(0).gameObject;
         EventSystem.current.SetSelectedGameObject(null);
         StartCoroutine(waitToSelect());
     }
@@ -86,7 +85,10 @@ public class EnciclopediaManager : MonoBehaviour
         esteElementomenu.panelMio = GameObject.Find("ListaCompletaIngredientes");
     }
 
+    public void definirNavegacionBotones()
+    {
 
+    }
 
     //------------------------------------------------------------------------------------------
     // Corrutina para que se pueda seleccionar el primer boton apenas se abre el menu

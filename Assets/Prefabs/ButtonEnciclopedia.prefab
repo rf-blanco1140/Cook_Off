@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+    m_PressedColor: {r: 0.31617647, g: 0.31385165, b: 0.31385165, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -198,6 +198,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreBoton: {fileID: 114136225166289804}
+  imagenIngrediente: {fileID: 0}
+  dulce: {fileID: 0}
+  salado: {fileID: 0}
+  amargo: {fileID: 0}
+  acido: {fileID: 0}
+  umami: {fileID: 0}
+  crujiente: {fileID: 0}
+  humedo: {fileID: 0}
+  seco: {fileID: 0}
+  suave: {fileID: 0}
 --- !u!114 &114764890661687078
 MonoBehaviour:
   m_ObjectHideFlags: 1
