@@ -244,7 +244,7 @@ public class BattleMenuManager : MonoBehaviour
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void presentarPlatoJurados()
     {
-
+        Debug.Log("En el futuro voy a hacer algo asombroso");
     }
 
 
