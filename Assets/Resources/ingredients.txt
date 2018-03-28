@@ -1,2 +1,4 @@
 limón;dulce:0;salado:0;amargo:3;acido:7;umami:1;crujiente:false;humedo:true;seco:false;suave:false
 salmón;dulce:0;salado:5;amargo:2;acido:0;umami:3;crujiente:false;humedo:true;seco:false;suave:true
+patacon;dulce:0;salado:7;amargo:1;acido:0;umami:5;crujiente:true;humedo:true;seco:false;suave:true
+ajo;dulce:0;salado:0;amargo:10;acido:3;umami:0;crujiente:true;humedo:true;seco:false;suave:false

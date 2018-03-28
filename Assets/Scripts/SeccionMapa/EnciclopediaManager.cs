@@ -88,17 +88,36 @@ public class EnciclopediaManager : MonoBehaviour
                 contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
 
 
+                // Define el segundo
+                newNav = new Navigation();
+                newNav.mode = Navigation.Mode.Explicit;
+                newNav.selectOnUp = contentPanel.GetChild(0).GetComponent<Button>();
+                if (contentPanel.GetChild(2) != null)
+                { newNav.selectOnDown = contentPanel.GetChild(2).GetComponent<Button>(); }
+
+                contentPanel.GetChild(1).gameObject.GetComponent<Button>().navigation = newNav;
+
+
                 // definir abajo del ultimo
                 newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
                 newNav.selectOnUp = contentPanel.GetChild(i - 1).GetComponent<Button>();
 
                 contentPanel.GetChild(i).gameObject.GetComponent<Button>().navigation = newNav;
+
+
+                // Define el paso de abajo del penultimo
+                newNav = new Navigation();
+                newNav.mode = Navigation.Mode.Explicit;
+                newNav.selectOnDown = contentPanel.GetChild(i).GetComponent<Button>();
+                newNav.selectOnUp = contentPanel.GetChild(i-2).GetComponent<Button>();
+
+                contentPanel.GetChild(i-1).gameObject.GetComponent<Button>().navigation = newNav;
             }
             else if(i == (listaIngredientes.Count - 1) && i == 0)
             {
 
             }
-            else if(i>0)
+            else if(i>1)
             {
                 // navegacion del elementoa actual
                 Navigation newNav = new Navigation();
@@ -108,8 +127,10 @@ public class EnciclopediaManager : MonoBehaviour
                 contentPanel.GetChild(i).gameObject.GetComponent<Button>().navigation = newNav;
 
 
+                newNav = new Navigation();
                 newNav.mode = Navigation.Mode.Explicit;
                 newNav.selectOnDown = contentPanel.GetChild(i).GetComponent<Button>();
+                newNav.selectOnUp = contentPanel.GetChild(i-2).GetComponent<Button>();
 
                 contentPanel.GetChild(i-1).gameObject.GetComponent<Button>().navigation = newNav;
             }

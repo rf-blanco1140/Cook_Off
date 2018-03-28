@@ -9,7 +9,7 @@ public class PobladorDeBotones : MonoBehaviour
 
     public Transform contentPanel;
 
-    private IngredientLoader loader;
+    public IngredientLoader loader;
 
 
     // Use this for initialization
@@ -42,4 +42,8 @@ public class PobladorDeBotones : MonoBehaviour
         addButtons(listaIngredeintes);
     }
 
+    private void OnEnable()
+    {
+        poblar();
+    }
 }
