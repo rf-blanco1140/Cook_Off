@@ -54,6 +54,7 @@ public class ManejoTiempoCocina : MonoBehaviour {
 			yield return new WaitForSeconds(duracion*0.05f);
 		}
 		enProgreso = false;
+        ComandosManager.instance.cambiarEstadoCocina(true);
         this.gameObject.SetActive(false);
 	}
 

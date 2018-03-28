@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ComandosManager : MonoBehaviour
@@ -175,10 +176,15 @@ public class ComandosManager : MonoBehaviour
                 int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
                 ManejoTiempoCocina.instance.gameObject.SetActive(true);
                 ManejoTiempoCocina.instance.empezar(numIngredeintes * 3f);
-                BattleMenuManager.instance.bloquearCocina();
-                BattleMenuManager.instance.seleccionarSubAccions(GameObject.Find("Juliana"));
+                cambiarEstadoCocina(false);
             }
             BattleMenuManager.instance.terminarSistemaRitmo();
         }
+    }
+
+    // Deshabilita la accion de cocinar
+    public void cambiarEstadoCocina(bool estado)
+    {
+        GameObject.Find("Acc3").GetComponent<Button>().interactable = estado;
     }
 }
