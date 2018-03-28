@@ -10,6 +10,8 @@ public class EvaluarComando : MonoBehaviour
 
     private int numComandosDetectados;
 
+    float multiplicadorComando;
+
 
 	void Start ()
     {
@@ -32,7 +34,9 @@ public class EvaluarComando : MonoBehaviour
         if(collision.gameObject.tag == "comando")
         {
         	comandoActual = collision.gameObject.GetComponent<Comando>();
+            multiplicadorComando++;
             numComandosDetectados++;
+            SistemaDePuntos.instance.aumentarPuntaje(multiplicadorComando * 100);
         }
     }
 
@@ -43,6 +47,7 @@ public class EvaluarComando : MonoBehaviour
         if(collision.gameObject.tag == "comando")
         {
         	comandoActual = null;
+            multiplicadorComando = 0;
             ComandosManager.instance.revisarSiTerminarSistemaRitmo(numComandosDetectados);
         }
     }
