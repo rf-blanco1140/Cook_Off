@@ -197,31 +197,48 @@ public class POIngrediente : MonoBehaviour
         return estado.fueServido();
     }
 
-	// Indica si el ingrediente o sus componentes fueron cortados.
-	// En caso de que el ingrediente o sus componentes en su totalidad no requieran
-	// corte o han sido cortados retorna true, false en caso contrario
-	public bool fueCortado()
+	// Indica si el ingrediente o sus componentes fueron cortados. Retorna la cantidad de ingredientes
+    // que requieren corte y no fueron cortados, incluyéndolo si es el caso.
+	public int fueCortado()
 	{
-		bool cortarse = estado.fueCortado();
-		foreach(POIngrediente ingrediente in componentes)
-		{
-			cortarse = cortarse && ingrediente.fueCortado();
-		}
-		return cortarse;
+        int cortados = 0;
+        if(!estado.fueCortado())
+        {
+            cortados++;
+        }
+        foreach (POIngrediente ingrediente in componentes)
+        {
+            cortados += ingrediente.fueCortado();
+        }
+        return cortados;
 	}
 
-	// Indica si el ingrediente o sus componentes fueron cocinados.
-	// En caso de que el ingrediente o sus componentes en su totalidad no requieran
-	// cocción o han sido cocinados retorna true, false en caso contrario
-	public bool fueCocinado()
+    // Indica si el ingrediente o sus componentes fueron cocinados. Retorna la cantidad de ingredientes
+    // que requieren cocción y no fueron cocinados, incluyéndolo si es el caso.
+	public int fueCocinado()
 	{
-		bool cocinarse = estado.fueCocinado();
-		foreach(POIngrediente ingrediente in componentes)
-		{
-			cocinarse = cocinarse && ingrediente.fueCocinado();
-		}
-		return cocinarse;
+        int cocinados = 0;
+        if (!estado.fueCocinado())
+        {
+            cocinados++;
+        }
+        foreach (POIngrediente ingrediente in componentes)
+        {
+            cocinados += ingrediente.fueCocinado();
+        }
+        return cocinados;
 	}
+
+    public int contarIngredientes()
+    {
+        int cantidad = 0;
+        cantidad++;
+        foreach (POIngrediente ingrediente in componentes)
+        {
+            cantidad += ingrediente.contarIngredientes();
+        }
+        return cantidad;
+    }
 
 	// Permite configurar los requerimientos de corte y cocción del ingrediente
 	public void configurar(bool pCorte, bool pCoccion)

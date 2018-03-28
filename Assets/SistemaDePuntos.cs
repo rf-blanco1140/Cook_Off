@@ -17,6 +17,8 @@ public class SistemaDePuntos : MonoBehaviour {
 
     Text textoTimer;
 
+    string resultado = "";
+
 	// Use this for initialization
 	void Start () {
 		
@@ -56,10 +58,26 @@ public class SistemaDePuntos : MonoBehaviour {
     public void evaluarPlatoFinal(List<POIngrediente> ingredientesServidos)
     {
         terminado = true;
+        int cantidadIngredientes = 0;
+        int sinCortar = 0;
+        int sinCocinar = 0;
+
         foreach(POIngrediente ingrediente in ingredientesServidos)
         {
-            
+            cantidadIngredientes += ingrediente.contarIngredientes();
+            sinCortar += ingrediente.fueCortado();
+            sinCocinar += ingrediente.fueCocinado();
         }
+
+        resultado = "RESULTADO: \n" +
+            "Aciertos acciones: +" + puntaje + "pts \n" +
+            "Ingredientes sin cortar: " + sinCortar + "/" + cantidadIngredientes + " = -" + (sinCortar*50) + "pts \n" +
+            "Ingredientes sin cocinar: " + sinCocinar + "/" + cantidadIngredientes + " = -" + (sinCocinar * 50) + "pts \n" +
+            "--------------------------- \n" +
+            "TOTAL = " + (puntaje - sinCortar*50 - sinCocinar*50 ) + " pts.";
+
+        Debug.Log(resultado);
+
     }
 
     public void actualizarPuntaje()
