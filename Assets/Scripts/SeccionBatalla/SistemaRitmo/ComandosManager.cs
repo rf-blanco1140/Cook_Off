@@ -69,12 +69,19 @@ public class ComandosManager : MonoBehaviour
                     comandosCorteJuliana();
                     break;
                 case "Asar":
+                    BattleMenuManager.instance.limpiarSubAccionSeleccionada();
+                    BattleMenuManager.instance.cerrarSubPaneles();
+                    //BattleMenuManager.instance.limpiarAccionSeleccionada();
                     comandosCorteJuliana();
                     break;
                 case "Hervir":
+                    BattleMenuManager.instance.limpiarSubAccionSeleccionada();
+                    BattleMenuManager.instance.cerrarSubPaneles();
                     comandosCorteJuliana();
                     break;
                 case "Hornear":
+                    BattleMenuManager.instance.limpiarSubAccionSeleccionada();
+                    BattleMenuManager.instance.cerrarSubPaneles();
                     comandosCorteJuliana();
                     break;
                 case "Elegante":

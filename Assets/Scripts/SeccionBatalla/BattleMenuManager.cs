@@ -114,6 +114,7 @@ public class BattleMenuManager : MonoBehaviour
     public void limpiarAccionSeleccionada()
     {
         accionSeleccionada = null;
+        accionSeleccionada = GameObject.Find("Acciones").gameObject.transform.GetChild(0).gameObject;
     }
 
     /// <summary>
@@ -123,6 +124,14 @@ public class BattleMenuManager : MonoBehaviour
     public void limpiarSubAccionSeleccionada()
     {
         subAccionSeleccionada = null;
+    }
+
+    public void cerrarSubPaneles()
+    {
+        GameObject.Find("Cocinar").gameObject.SetActive(false);
+        /*GameObject.Find("Mezclar").gameObject.SetActive(false);
+        GameObject.Find("Cortar").gameObject.SetActive(false);
+        GameObject.Find("Servir").gameObject.SetActive(false);*/
     }
 
     /// <summary>

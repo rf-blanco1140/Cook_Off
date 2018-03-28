@@ -44,8 +44,12 @@ public class GameManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        IngredientLoader loader = GameObject.Find("Overworld").GetComponent<IngredientLoader>();
-        enciclopedia = loader.setUpAndRun();
+        if(GameObject.Find("Overworld") != null)
+        {
+            IngredientLoader loader = GameObject.Find("Overworld").GetComponent<IngredientLoader>();
+            enciclopedia = loader.setUpAndRun();
+        }
+        
     }
 
     // Use this for initialization
