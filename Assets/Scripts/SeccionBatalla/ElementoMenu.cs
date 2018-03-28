@@ -81,9 +81,12 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
 		if(activo)
 		{
-			panelHijo.SetActive(true);
-            hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
-			evSys.SetSelectedGameObject(hijo.gameObject);
+            if(panelHijo != null && hijo != null)
+            {
+                panelHijo.SetActive(true);
+                hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
+                evSys.SetSelectedGameObject(hijo.gameObject);
+            }
 		}
     }
 

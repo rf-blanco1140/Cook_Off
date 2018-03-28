@@ -30,15 +30,19 @@ public class BotonIngrediente : MonoBehaviour, ISelectHandler
     void Start ()
     {
         GameObject dulceObject = GameObject.Find("Dulce");
-        dulce = dulceObject.GetComponent<Text>();
-        salado = GameObject.Find("Salado").GetComponent<Text>();
-        amargo = GameObject.Find("Amargo").GetComponent<Text>();
-        acido = GameObject.Find("Acido").GetComponent<Text>();
-        umami = GameObject.Find("Umami").GetComponent<Text>();
-        crujiente = GameObject.Find("Crujiente").GetComponent<Text>();
-        humedo = GameObject.Find("Humedo").GetComponent<Text>();
-        seco = GameObject.Find("Seco").GetComponent<Text>();
-        suave = GameObject.Find("Suave").GetComponent<Text>();
+        if(dulceObject != null)
+        {
+            dulce = dulceObject.GetComponent<Text>();
+            salado = GameObject.Find("Salado").GetComponent<Text>();
+            amargo = GameObject.Find("Amargo").GetComponent<Text>();
+            acido = GameObject.Find("Acido").GetComponent<Text>();
+            umami = GameObject.Find("Umami").GetComponent<Text>();
+            crujiente = GameObject.Find("Crujiente").GetComponent<Text>();
+            humedo = GameObject.Find("Humedo").GetComponent<Text>();
+            seco = GameObject.Find("Seco").GetComponent<Text>();
+            suave = GameObject.Find("Suave").GetComponent<Text>();
+        }
+        
     }
 
     // Agrega los valores pasados al boton
@@ -55,7 +59,10 @@ public class BotonIngrediente : MonoBehaviour, ISelectHandler
     public void setUpRefenrenciasBoton()
     {
         GameObject dulceObject = GameObject.Find("Dulce");
-        dulce = dulceObject.GetComponent<Text>();
+        if(dulceObject != null)
+        {
+            dulce = dulceObject.GetComponent<Text>();
+        }
     }
 
     // Agrega los stats del ingrediente en el panel del canvas de stats en base a la info

@@ -239,6 +239,16 @@ public class BattleMenuManager : MonoBehaviour
         return subAccionSeleccionada;
     }
 
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //  Este es el metodo que realiza las acciones cuando se presenta el plato a los jurados
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void presentarPlatoJurados()
+    {
+
+    }
+
+
+
     // Method that manages the mouse click events so it dosn't fuck up everything else
     private void onMouseClickReturnToOriginalPosition()
     {

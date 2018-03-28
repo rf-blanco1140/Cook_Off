@@ -9,6 +9,8 @@ public class PobladorDeBotones : MonoBehaviour
 
     public Transform contentPanel;
 
+    private IngredientLoader loader;
+
 
     // Use this for initialization
     void Start ()
@@ -28,6 +30,16 @@ public class PobladorDeBotones : MonoBehaviour
             ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
             ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
             ingreStats.definirNombre(esteIngredeinte.getNombre());
+
+            BotonIngrediente nuevoElementoMenu = newButton.GetComponent<BotonIngrediente>();
+            nuevoElementoMenu.inicializarValoresBoton(newButton);
         }
     }
+
+    public void poblar()
+    {
+        List<POIngrediente> listaIngredeintes = loader.setUpAndRun();
+        addButtons(listaIngredeintes);
+    }
+
 }
