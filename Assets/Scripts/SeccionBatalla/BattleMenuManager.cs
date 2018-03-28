@@ -244,10 +244,22 @@ public class BattleMenuManager : MonoBehaviour
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public void presentarPlatoJurados()
     {
-        Debug.Log("En el futuro voy a hacer algo asombroso");
+        SistemaDePuntos.instance.evaluarPlatoFinal(darIngredientesServidos());
     }
 
-
+    public List<POIngrediente> darIngredientesServidos()
+    {
+        List<POIngrediente> servidos = new List<POIngrediente>();
+        foreach(GameObject ingrediente in listaTotalIngredientes)
+        {
+            POIngrediente elIngrediente = ingrediente.GetComponent<POIngrediente>();
+            if(elIngrediente.estaServido())
+            {
+                servidos.Add(elIngrediente);
+            }
+        }
+        return servidos;
+    }
 
     // Method that manages the mouse click events so it dosn't fuck up everything else
     private void onMouseClickReturnToOriginalPosition()

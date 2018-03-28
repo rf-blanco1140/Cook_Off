@@ -53,9 +53,13 @@ public class SistemaDePuntos : MonoBehaviour {
         actualizarPuntaje();
     }
 
-    public void evaluarPlatoFinal()
+    public void evaluarPlatoFinal(List<POIngrediente> ingredientesServidos)
     {
         terminado = true;
+        foreach(POIngrediente ingrediente in ingredientesServidos)
+        {
+            
+        }
     }
 
     public void actualizarPuntaje()
@@ -81,7 +85,7 @@ public class SistemaDePuntos : MonoBehaviour {
         }
         if(!terminado)
         {
-            evaluarPlatoFinal();
+            evaluarPlatoFinal(BattleMenuManager.instance.darIngredientesServidos());
         }
 
     }

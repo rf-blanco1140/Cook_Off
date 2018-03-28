@@ -191,6 +191,12 @@ public class POIngrediente : MonoBehaviour
 		estado.servir();
 	}
 
+    // Indica si ha sido servido
+    public bool estaServido()
+    {
+        return estado.fueServido();
+    }
+
 	// Indica si el ingrediente o sus componentes fueron cortados.
 	// En caso de que el ingrediente o sus componentes en su totalidad no requieran
 	// corte o han sido cortados retorna true, false en caso contrario
