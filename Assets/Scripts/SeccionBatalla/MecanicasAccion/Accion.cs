@@ -54,7 +54,7 @@ public class Accion : MonoBehaviour
         ingredeintesQueUsara[posEnListaIngredeintesQueUsara] = objetoIngredeinte;
         posEnListaIngredeintesQueUsara++;
 
-        imprimirObjetosEnLista();
+        //imprimirObjetosEnLista();
     }
 
     // Retira el elemento de la lista pedido y se reorganiza la lisat de ingredientes a usar
@@ -81,7 +81,7 @@ public class Accion : MonoBehaviour
             }
         }
 
-        imprimirObjetosEnLista();
+        //imprimirObjetosEnLista();
     }
 
     // Vacia la lista y retorna el indice de la posisicon actual a 0

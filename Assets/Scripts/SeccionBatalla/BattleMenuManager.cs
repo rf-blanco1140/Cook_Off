@@ -230,6 +230,12 @@ public class BattleMenuManager : MonoBehaviour
         return subAccionSeleccionada;
     }
 
+    // Deshabilita la accion de cocinar
+    public void bloquearCocina()
+    {
+        accionSeleccionada.GetComponent<Button>().interactable = false;
+    }
+
     // Method that manages the mouse click events so it dosn't fuck up everything else
     private void onMouseClickReturnToOriginalPosition()
     {

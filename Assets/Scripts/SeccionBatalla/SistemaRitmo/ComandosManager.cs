@@ -15,9 +15,6 @@ public class ComandosManager : MonoBehaviour
     private Comando nuevoComando;
 
 
-
-
-
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -172,6 +169,15 @@ public class ComandosManager : MonoBehaviour
     {
         if(comandosDetectados == comandosActualesTotales)
         {
+            string nombreAccion = BattleMenuManager.instance.getAccionSeleccionada().name;
+            if(nombreAccion.Equals("Acc3"))
+            {
+                int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
+                ManejoTiempoCocina.instance.gameObject.SetActive(true);
+                ManejoTiempoCocina.instance.empezar(numIngredeintes * 3f);
+                BattleMenuManager.instance.bloquearCocina();
+                BattleMenuManager.instance.seleccionarSubAccions(GameObject.Find("Juliana"));
+            }
             BattleMenuManager.instance.terminarSistemaRitmo();
         }
     }

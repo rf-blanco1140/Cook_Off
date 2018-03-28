@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ManejoTiempoCocina : MonoBehaviour {
 
+    public static ManejoTiempoCocina instance = null;
+
 	Image imagenBarra;
 
 	float maxTiempo = 1f;
@@ -19,6 +21,22 @@ public class ManejoTiempoCocina : MonoBehaviour {
 		imagenBarra = GameObject.Find("Relleno").GetComponent<Image>();
 		this.gameObject.SetActive(false);
 	}
+
+    //Awake is always called before any Start functions
+    void Awake()
+    {
+        //Check if instance already exists
+        if (instance == null)
+
+            //if not, set instance to this
+            instance = this;
+
+        //If instance already exists and it's not this:
+        else if (instance != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+    }
 	
 	public void empezar(float pDuracion)
 	{
@@ -36,6 +54,7 @@ public class ManejoTiempoCocina : MonoBehaviour {
 			yield return new WaitForSeconds(duracion*0.05f);
 		}
 		enProgreso = false;
+        this.gameObject.SetActive(false);
 	}
 
 	public bool estaEnProgreso()
