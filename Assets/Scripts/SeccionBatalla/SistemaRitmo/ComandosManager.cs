@@ -172,6 +172,35 @@ public class ComandosManager : MonoBehaviour
         GeneradorComandos.instance.configurarComandos(newComandos);
     }
 
+    // Agrega los comandos a la accion para mezclar a mano
+    // Mezcla los ingredientes
+    public void comandosMezclaAMano()
+    {
+
+        int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
+        int limiteFor = numIngredeintes;
+        Comando[] newComandos = new Comando[limiteFor*4];
+
+        for (int i = 0; i < limiteFor; i++)
+        {
+            nuevoComando.configurar(KeyCode.LeftArrow);
+            newComandos[i+0] = nuevoComando;
+
+            nuevoComando.configurar(KeyCode.UpArrow);
+            newComandos[i+1] = nuevoComando;
+
+            nuevoComando.configurar(KeyCode.RightArrow);
+            newComandos[i+2] = nuevoComando;
+
+            nuevoComando.configurar(KeyCode.DownArrow);
+            newComandos[i+3] = nuevoComando;
+        }
+
+        comandosActualesTotales = newComandos.Length;
+        BattleMenuManager.instance.mezclarIngredientesListos();
+        GeneradorComandos.instance.configurarComandos(newComandos);
+    }
+
 
     public void revisarSiTerminarSistemaRitmo(int comandosDetectados)
     {

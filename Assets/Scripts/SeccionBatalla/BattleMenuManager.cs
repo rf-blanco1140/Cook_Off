@@ -239,6 +239,19 @@ public class BattleMenuManager : MonoBehaviour
         return subAccionSeleccionada;
     }
 
+    // Mezcla los ingredientes que fueron seleccionados en la acción de mezclar
+    public void mezclarIngredientesListos()
+    {
+        POIngrediente primero = ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
+        List<POIngrediente> lista = new List<POIngrediente>();
+        for (int i = 1; i < ingredientesListosParaUsar.Length; i++)
+        {
+            POIngrediente temp = ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
+            lista.Add(temp);
+        }
+        primero.mezclar(lista);
+    }
+
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //  Este es el metodo que realiza las acciones cuando se presenta el plato a los jurados
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
