@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GeneradorComandos : MonoBehaviour
 {
@@ -60,13 +61,15 @@ public class GeneradorComandos : MonoBehaviour
 			GameObject temp = pool.GetObject();
 			temp.transform.SetParent(this.transform);
 			Comando actual = temp.GetComponent<Comando>();
+            actual.gameObject.GetComponent<Image>().color = Color.white;
 			actual.cuadrarPool(pool);
 			actual.configurarPuntos(inicio.position, fin.position);
 			actual.configurar(com.darTecla());	
 			actual.empezar();
 			yield return new WaitForSeconds(delayComandos);		
 		}
-		yield return new WaitForSeconds(3f);		
+		yield return new WaitForSeconds(5f);
+        ComandosManager.instance.revisarSiTerminarSistemaRitmo();
 	}
 
     void OnEnable()

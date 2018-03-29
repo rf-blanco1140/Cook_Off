@@ -202,20 +202,17 @@ public class ComandosManager : MonoBehaviour
     }
 
 
-    public void revisarSiTerminarSistemaRitmo(int comandosDetectados)
+    public void revisarSiTerminarSistemaRitmo()
     {
-        if(comandosDetectados == comandosActualesTotales)
+        string nombreAccion = BattleMenuManager.instance.getAccionSeleccionada().name;
+        if(nombreAccion.Equals("Acc3"))
         {
-            string nombreAccion = BattleMenuManager.instance.getAccionSeleccionada().name;
-            if(nombreAccion.Equals("Acc3"))
-            {
-                int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
-                ManejoTiempoCocina.instance.gameObject.SetActive(true);
-                ManejoTiempoCocina.instance.empezar(numIngredeintes * 3f);
-                cambiarEstadoCocina(false);
-            }
-            BattleMenuManager.instance.terminarSistemaRitmo();
+           int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
+           ManejoTiempoCocina.instance.gameObject.SetActive(true);
+           ManejoTiempoCocina.instance.empezar(numIngredeintes * 3f);
+           cambiarEstadoCocina(false);
         }
+        BattleMenuManager.instance.terminarSistemaRitmo();
     }
 
     // Deshabilita la accion de cocinar

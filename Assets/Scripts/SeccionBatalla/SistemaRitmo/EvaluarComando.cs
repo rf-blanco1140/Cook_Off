@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EvaluarComando : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class EvaluarComando : MonoBehaviour
 
     float multiplicadorComando;
 
+    Image barraIndicador;
+
 
 	void Start ()
     {
+        barraIndicador = GameObject.Find("Indicador").GetComponent<Image>();
         numComandosDetectados = 0;
 	}
 	
@@ -23,8 +27,9 @@ public class EvaluarComando : MonoBehaviour
 	void Update () {
 		if(comandoActual != null && Input.GetKeyDown(comandoActual.darTecla()))
 		{
-			comandoActual.terminar();
-            ComandosManager.instance.revisarSiTerminarSistemaRitmo(numComandosDetectados);
+            comandoActual.gameObject.GetComponent<Image>().color = Color.green;
+            StartCoroutine("MostrarAcierto");
+            comandoActual.terminar();
         }
 	}
 
@@ -46,14 +51,21 @@ public class EvaluarComando : MonoBehaviour
     {
         if(collision.gameObject.tag == "comando")
         {
+            comandoActual.gameObject.GetComponent<Image>().color = Color.red;
         	comandoActual = null;
             multiplicadorComando = 0;
-            ComandosManager.instance.revisarSiTerminarSistemaRitmo(numComandosDetectados);
         }
     }
 
     private void OnEnable()
     {
         numComandosDetectados = 0;
+    }
+
+    private IEnumerator MostrarAcierto()
+    {
+        barraIndicador.color = Color.green;
+        yield return new WaitForSeconds(0.2f);
+        barraIndicador.color = Color.white;
     }
 }

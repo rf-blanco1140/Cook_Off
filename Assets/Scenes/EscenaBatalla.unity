@@ -200,7 +200,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4590669969152282, guid: 3a8b3da1c45834848ba9b02ab486a96e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 207.5
+      value: 248.7
       objectReference: {fileID: 0}
     - target: {fileID: 4590669969152282, guid: 3a8b3da1c45834848ba9b02ab486a96e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -736,7 +736,7 @@ Prefab:
     - target: {fileID: 224092689461859964, guid: 9f60c3175651cb643b590cc71ab1479f,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 148.4
+      value: 101.1
       objectReference: {fileID: 0}
     - target: {fileID: 224092689461859964, guid: 9f60c3175651cb643b590cc71ab1479f,
         type: 2}
@@ -841,6 +841,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224603745212398088, guid: 9f60c3175651cb643b590cc71ab1479f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 106.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f60c3175651cb643b590cc71ab1479f, type: 2}
@@ -4345,7 +4350,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\xBF Presentar al jurado?"
 --- !u!222 &1217338186
@@ -6722,7 +6727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 44.9}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1949003560
