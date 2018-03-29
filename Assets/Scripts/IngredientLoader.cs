@@ -49,12 +49,15 @@ public class IngredientLoader : MonoBehaviour
             bool humedo = atributos[14].Equals("true");
             bool seco = atributos[16].Equals("true");
             bool suave = atributos[18].Equals("true");
+            bool corte = atributos[20].Equals("true");
+            bool coccion = atributos[22].Equals("true");
 
             POIngrediente temp = poolIngredientes.GetObject().GetComponent<POIngrediente>();
             temp.transform.parent = gameObject.transform;
             temp.definirNombre(nombre);
             temp.configurarSabor(dulce, salado, amargo, acido, umami);
             temp.configurarTextura(suave, crujiente, humedo, seco);
+            temp.configurar(corte, coccion);
             ingredientes.Add(temp);
             lineaActual = reader.ReadLine();
         }
