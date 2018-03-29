@@ -33,6 +33,8 @@ public class BattleMenuManager : MonoBehaviour
 
     private GameObject peleaRitmoReference;
 
+
+
     //---------------------------------------------------------------------------
     // Methods
     //---------------------------------------------------------------------------
@@ -56,11 +58,16 @@ public class BattleMenuManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if(GameManager.instance.getInventario().Count == 0)
+        {
+            GameManager.instance.llenarInvenatrio();
+        }
+
         //Disapear mouse cousor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        objetoPadreRecursosDisponibles = GameObject.Find("Recursos");
+        objetoPadreRecursosDisponibles = GameObject.Find("ListaCompletaIngredientes");
         peleaRitmoReference = GameObject.Find("PeleaRitmo");
 
         ingredientesListosParaUsar = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];

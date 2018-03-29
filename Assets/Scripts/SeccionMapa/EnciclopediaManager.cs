@@ -17,7 +17,7 @@ public class EnciclopediaManager : MonoBehaviour
 
     public Transform contentPanel;
 
-    public Button botonEnciclopedia;
+    public Button botonPadre;
 
     private GameObject primerBotonEnLista;
 
@@ -33,6 +33,16 @@ public class EnciclopediaManager : MonoBehaviour
 	}
 
     private void OnEnable()
+    {     
+        if(GameManager.instance != null)
+        {
+            listaIngredientes = GameManager.instance.getEnciclopedia();
+            RemoveButtons();
+            addButtons();
+        }
+    }
+
+    public void poblar()
     {
         listaIngredientes = GameManager.instance.getEnciclopedia();
         RemoveButtons();
@@ -147,8 +157,12 @@ public class EnciclopediaManager : MonoBehaviour
     public void setUpElementoMenu(GameObject nuevoBoton)
     {
         ElementoMenuMapa esteElementomenu = nuevoBoton.GetComponent<ElementoMenuMapa>();
-        esteElementomenu.padre = botonEnciclopedia;
-        esteElementomenu.panelMio = GameObject.Find("ListaCompletaIngredientes");
+        if(esteElementomenu!= null)
+        {
+            esteElementomenu.padre = botonPadre;
+            esteElementomenu.panelMio = GameObject.Find("ListaCompletaIngredientes");
+        }
+        
     }
 
     public void definirNavegacionBotones()

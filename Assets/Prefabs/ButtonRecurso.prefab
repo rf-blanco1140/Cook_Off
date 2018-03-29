@@ -24,8 +24,9 @@ GameObject:
   - component: {fileID: 114852579698635324}
   - component: {fileID: 114321903078366488}
   - component: {fileID: 114549696738548586}
-  - component: {fileID: 114015196197869156}
   - component: {fileID: 114871890840973550}
+  - component: {fileID: 114345916621080248}
+  - component: {fileID: 114400425872682376}
   m_Layer: 0
   m_Name: ButtonRecurso
   m_TagString: Untagged
@@ -50,28 +51,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114015196197869156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1212009343122094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62cd33b337afcea4d9901d50eeb4f500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nombreBoton: {fileID: 114036621115942754}
-  imagenIngrediente: {fileID: 0}
-  dulce: {fileID: 0}
-  salado: {fileID: 0}
-  amargo: {fileID: 0}
-  acido: {fileID: 0}
-  umami: {fileID: 0}
-  crujiente: {fileID: 0}
-  humedo: {fileID: 0}
-  seco: {fileID: 0}
-  suave: {fileID: 0}
 --- !u!114 &114036621115942754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +103,29 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114345916621080248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212009343122094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35742b0e9bc31b14fb457bcb037a73b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreBoton: {fileID: 114036621115942754}
+--- !u!114 &114400425872682376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212009343122094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47885ff2ec11594a80462ef436f0e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114549696738548586
 MonoBehaviour:
   m_ObjectHideFlags: 1

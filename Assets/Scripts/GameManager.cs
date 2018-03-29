@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     // Inventario donde se guardan todos los recursos que recoja el jugador
-    private GameObject[] inventario;
+    private List<POIngrediente> inventario;
 
     // Enciclopedia donde se muestran todos los items en existencia
     private List<POIngrediente> enciclopedia;
@@ -44,22 +44,32 @@ public class GameManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        if(GameObject.Find("Overworld") != null)
-        {
-            IngredientLoader loader = GameObject.Find("Overworld").GetComponent<IngredientLoader>();
-            enciclopedia = loader.setUpAndRun();
-        }
-        
+
+        IngredientLoader loader = GameObject.Find("Loader").GetComponent<IngredientLoader>();
+        enciclopedia = loader.setUpAndRun();
+
+        //GameObject.Find("ContentAdder").GetComponent<EnciclopediaManager>().poblar();
     }
+
+    
 
     // Use this for initialization
     void Start ()
     {
-        inventario = new GameObject[100];
+        
+            
+        
+
+       // inventario = new GameObject[100];
         //enciclopedia = new GameObject[3];
     }
+
+    public void llenarInvenatrio()
+    {
+            inventario = enciclopedia;
+    }
 	
-    public GameObject[] getInventario()
+    public List<POIngrediente> getInventario()
     {
         return inventario;
     }
@@ -69,19 +79,6 @@ public class GameManager : MonoBehaviour
         return enciclopedia;
     }
 
-    public void poblarEnciclopedia()
-    {
-       /* GameObject nuevoIngrediente = new GameObject();
-        nuevoIngrediente.name = "CarneAsada";
-        enciclopedia[0] = nuevoIngrediente;
-
-        nuevoIngrediente = new GameObject();
-        nuevoIngrediente.name = "Sal";
-        enciclopedia[1] = nuevoIngrediente;
-
-        nuevoIngrediente = new GameObject();
-        nuevoIngrediente.name = "Aceite";
-        enciclopedia[2] = nuevoIngrediente;*/
-    }
+    
     
 }

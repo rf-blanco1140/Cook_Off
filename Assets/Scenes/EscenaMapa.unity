@@ -609,6 +609,47 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &363207490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 363207492}
+  - component: {fileID: 363207491}
+  m_Layer: 0
+  m_Name: Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &363207491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 363207490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e867828c00c4d29b2d62cedb4701e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientes: []
+--- !u!4 &363207492
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 363207490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 422.19357, y: 218.2049, z: -3.3184726}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527889613
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +732,6 @@ GameObject:
   m_Component:
   - component: {fileID: 533635709}
   - component: {fileID: 533635710}
-  - component: {fileID: 533635711}
   m_Layer: 0
   m_Name: Overworld
   m_TagString: Untagged
@@ -728,18 +768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d63bb172892b3745b1f0414884f6bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &533635711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 533635708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e867828c00c4d29b2d62cedb4701e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientes: []
 --- !u!1 &603552062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1077,7 @@ MonoBehaviour:
   buttonObjectPool: {fileID: 1490509451}
   listaIngredientes: []
   contentPanel: {fileID: 801959168}
-  botonEnciclopedia: {fileID: 1966759854}
+  botonPadre: {fileID: 0}
 --- !u!1 &827544020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2344,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1895392329}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -47,8 +47,8 @@ public class POIngrediente : MonoBehaviour
 	
 	void Start ()
     {
-		estado = new POEstado();
-	}
+        if (estado == null) { estado = new POEstado(); }
+    }
 
     // Define el nombre del ingrediente
     public void definirNombre(string pNombre)
@@ -243,6 +243,7 @@ public class POIngrediente : MonoBehaviour
 	// Permite configurar los requerimientos de corte y cocción del ingrediente
 	public void configurar(bool pCorte, bool pCoccion)
 	{
+        if (estado==null) { estado = new POEstado(); }
 		estado.configurar(pCorte, pCoccion);
 	}
 }
