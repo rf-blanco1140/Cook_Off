@@ -26,10 +26,10 @@ public class BattleMenuManager : MonoBehaviour
     private GameObject subAccionSeleccionada;
 
     // Lista con todos los ingredientes, en cualquier estado
-    private GameObject[] listaTotalIngredientes;
+    private List<GameObject> listaTotalIngredientes;
 
     // Lista de los ingredientes que se van a usar en la subaccion seleccionada
-    private GameObject[] ingredientesListosParaUsar;
+    private List<GameObject> ingredientesListosParaUsar;
 
     private GameObject peleaRitmoReference;
 
@@ -70,8 +70,8 @@ public class BattleMenuManager : MonoBehaviour
         objetoPadreRecursosDisponibles = GameObject.Find("ListaCompletaIngredientes");
         peleaRitmoReference = GameObject.Find("PeleaRitmo");
 
-        ingredientesListosParaUsar = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
-        listaTotalIngredientes = new GameObject[objetoPadreRecursosDisponibles.transform.childCount];
+        ingredientesListosParaUsar = new List<GameObject>();
+        listaTotalIngredientes = new List<GameObject>();
         for (int i=0; i < objetoPadreRecursosDisponibles.transform.childCount; i++)
         {
             ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
@@ -89,7 +89,6 @@ public class BattleMenuManager : MonoBehaviour
     {
         accionSeleccionada = pAccionSeleccionada;
         string nombreAcc = accionSeleccionada.GetComponentInChildren<Text>().text;
-        Debug.Log("nombre accion es: "+nombreAcc);
     }
 
     // Metodo que guarda la ultima subaccion seleccionada
@@ -172,7 +171,7 @@ public class BattleMenuManager : MonoBehaviour
     /// <param name="accionDefinida"> La accion que se va a realizar </param>
     public void definirIngredientesUsables(string accionDefinida)
     {
-        for (int i = 0; i < listaTotalIngredientes.Length; i++)
+        for (int i = 0; i < listaTotalIngredientes.Count; i++)
         {
             GameObject esteIngrediente = listaTotalIngredientes[i];
 
@@ -185,7 +184,7 @@ public class BattleMenuManager : MonoBehaviour
             }
             else if (accionDefinida == "Mezclar")
             {
-                // Por ahora se asume que se muestran todos
+                // Siempre se muestran todos
                 ingredientesListosParaUsar[i] = esteIngrediente;
             }
             else if (accionDefinida == "cocinar")
@@ -203,7 +202,7 @@ public class BattleMenuManager : MonoBehaviour
         }
     }
 
-    public GameObject[] getIngredeintesUsables()
+    public List<GameObject> getIngredeintesUsables()
     {
         return ingredientesListosParaUsar;
     }
@@ -253,12 +252,15 @@ public class BattleMenuManager : MonoBehaviour
     {
         POIngrediente primero = ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
         List<POIngrediente> lista = new List<POIngrediente>();
-        for (int i = 1; i < ingredientesListosParaUsar.Length; i++)
+        listaTotalIngredientes.Remove(primero.gameObject);
+        for (int i = 1; i < ingredientesListosParaUsar.Count; i++)
         {
             POIngrediente temp = ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
             lista.Add(temp);
+            listaTotalIngredientes.Remove(temp.gameObject);
         }
         primero.mezclar(lista);
+        listaTotalIngredientes.Add(primero.gameObject);
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
