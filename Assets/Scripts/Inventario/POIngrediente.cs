@@ -60,7 +60,7 @@ public class POIngrediente : MonoBehaviour
     public string getNombre()
     {
         string cadena = "";
-        if(componentes.Count == 0)
+        if(componentes == null || componentes.Count == 0)
         {
             cadena = nombre;
         }
