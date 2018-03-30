@@ -59,6 +59,21 @@ public class POIngrediente : MonoBehaviour
     // Retorna el nombre del ingrediente
     public string getNombre()
     {
+        string cadena = "";
+        if(componentes.Count == 0)
+        {
+            cadena = nombre;
+        }
+        else
+        {
+            cadena = nombre + " (";
+            foreach(POIngrediente ingrediente in componentes)
+            {
+                cadena += ingrediente.getNombre() + ", ";
+            }
+            cadena = cadena.Substring(0, cadena.Length - 2);
+            cadena += ")";
+        }
         return nombre;
     }
 
