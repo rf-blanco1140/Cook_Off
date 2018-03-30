@@ -58,7 +58,7 @@ public class BattleMenuManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(GameManager.instance.getInventario().Count == 0)
+        if(GameManager.instance.getInventario() == null || GameManager.instance.getInventario().Count == 0)
         {
             GameManager.instance.llenarInvenatrio();
         }
@@ -88,6 +88,8 @@ public class BattleMenuManager : MonoBehaviour
     public void seleccionarAccion(GameObject pAccionSeleccionada)
     {
         accionSeleccionada = pAccionSeleccionada;
+        string nombreAcc = accionSeleccionada.GetComponentInChildren<Text>().text;
+        Debug.Log("nombre accion es: "+nombreAcc);
     }
 
     // Metodo que guarda la ultima subaccion seleccionada

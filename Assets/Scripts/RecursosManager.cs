@@ -27,7 +27,7 @@ public class RecursosManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (GameManager.instance != null)
+        if (GameManager.instance != null && GameManager.instance.getInventario() != null)
         {
             listaIngredientes = GameManager.instance.getInventario();
             RemoveButtons();
@@ -122,6 +122,7 @@ public class RecursosManager : MonoBehaviour
 
     public void addButtons()
     {
+        if (listaIngredientes==null) { Debug.Log("lista es nulo"); }
         for (int i = 0; i < listaIngredientes.Count; i++)
         {
             POIngrediente esteIngredeinte = listaIngredientes[i];
