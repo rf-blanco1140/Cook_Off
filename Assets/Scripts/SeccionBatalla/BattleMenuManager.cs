@@ -72,10 +72,13 @@ public class BattleMenuManager : MonoBehaviour
 
         ingredientesListosParaUsar = new List<GameObject>();
         listaTotalIngredientes = new List<GameObject>();
+        if (objetoPadreRecursosDisponibles.transform.GetChild(0) == null) { Debug.Log("objetos padre es nulo"); }
         for (int i=0; i < objetoPadreRecursosDisponibles.transform.childCount; i++)
         {
-            ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
-            listaTotalIngredientes[i] = ingredientesListosParaUsar[i];
+            ingredientesListosParaUsar.Add(objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject);
+            listaTotalIngredientes.Add(ingredientesListosParaUsar[i]);
+            //ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
+            //listaTotalIngredientes[i] = ingredientesListosParaUsar[i];
         }
 
         objetoPadreRecursosDisponibles.SetActive(false);
