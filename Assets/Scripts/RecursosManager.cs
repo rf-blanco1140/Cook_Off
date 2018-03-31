@@ -11,6 +11,8 @@ public class RecursosManager : MonoBehaviour
     public Transform contentPanel;
     private GameObject primerBotonEnLista;
     public Button botonPadre;
+    public GameObject okButton;
+    public GameObject okButtonParent;
 
 
 
@@ -51,7 +53,7 @@ public class RecursosManager : MonoBehaviour
         {
             addButtons();
         }
-        
+        addOkButton();
     }
 
     private void RemoveButtons()
@@ -130,6 +132,39 @@ public class RecursosManager : MonoBehaviour
 
             contentPanel.GetChild(i - 1).gameObject.GetComponent<Button>().navigation = newNav;
         }
+    }
+
+    public void addOkButton()
+    {
+        //GameObject newButton = GameObject.Find("OkButtonObjectPool").GetComponent<SimpleObjectPool>().GetObject();
+        //newButton.transform.SetParent(contentPanel);
+        okButton.transform.SetParent(contentPanel);
+        Debug.Log("la countes "+contentPanel.childCount);
+
+        //setUpElementoMenu(newButton);
+
+        Navigation newNav = new Navigation();
+        newNav.mode = Navigation.Mode.Explicit;
+        newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
+        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count-1).GetComponent<Button>();
+        contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
+        Debug.Log("el ingredeinte es: "+ contentPanel.GetChild(listaIngredientes.Count).gameObject.name);
+
+        // navegacion ultimo ingredeintes
+        newNav = new Navigation();
+        newNav.mode = Navigation.Mode.Explicit;
+        newNav.selectOnDown = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
+        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count - 2).GetComponent<Button>();
+
+        contentPanel.GetChild(listaIngredientes.Count - 1).gameObject.GetComponent<Button>().navigation = newNav;
+
+        // Navegacion penultimo ingrdeinte
+        newNav = new Navigation();
+        newNav.mode = Navigation.Mode.Explicit;
+        newNav.selectOnDown = contentPanel.GetChild(1).GetComponent<Button>();
+        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
+
+        contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
     }
 
     public void addButtons()
