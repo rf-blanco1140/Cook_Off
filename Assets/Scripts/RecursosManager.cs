@@ -65,7 +65,7 @@ public class RecursosManager : MonoBehaviour
         }
     }
 
-    public void definirNavegacion(int i, GameObject newButton)
+    public void definirNavegacionRecursos(int i, GameObject newButton)
     {
         // decirle cual es su elemento de arriba
         // Si es el primero el elemento de arriba es el ultimo
@@ -113,7 +113,12 @@ public class RecursosManager : MonoBehaviour
         }
         else if (i == (listaIngredientes.Count - 1) && i == 0)
         {
+            Navigation newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(i).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(i).GetComponent<Button>();
 
+            contentPanel.GetChild(i - 1).gameObject.GetComponent<Button>().navigation = newNav;
         }
         else if (i > 1)
         {
@@ -134,12 +139,68 @@ public class RecursosManager : MonoBehaviour
         }
     }
 
+    public void definirNavegacionOk()
+    {
+        if(listaIngredientes.Count == 0)
+        {
+            // Se queda quieto
+            Navigation newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(0).GetComponent<Button>();
+            contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
+        }
+        else if(listaIngredientes.Count == 1)
+        {
+            // se mueve entre OK y el unico ingredeinte
+            Navigation newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(0).GetComponent<Button>();
+            contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
+
+            // navegacion del boton ingredeinte
+            newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(1).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(1).GetComponent<Button>();
+            contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
+        }
+        else if(listaIngredientes.Count >= 2)
+        {
+            // Se mueve normal desde ok
+            // abajo es el prmier boton
+            // arriba el penultimo
+            Navigation newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count - 1).GetComponent<Button>();
+            contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
+
+            // navegacion ultimo ingredeintes
+            newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count - 2).GetComponent<Button>();
+
+            contentPanel.GetChild(listaIngredientes.Count - 1).gameObject.GetComponent<Button>().navigation = newNav;
+
+            // Navegacion penultimo ingrdeinte
+            newNav = new Navigation();
+            newNav.mode = Navigation.Mode.Explicit;
+            newNav.selectOnDown = contentPanel.GetChild(1).GetComponent<Button>();
+            newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
+
+            contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
+        }
+    }
+
     public void addOkButton()
     {
         //GameObject newButton = GameObject.Find("OkButtonObjectPool").GetComponent<SimpleObjectPool>().GetObject();
         //newButton.transform.SetParent(contentPanel);
         okButton.transform.SetParent(contentPanel);
-        Debug.Log("la countes "+contentPanel.childCount);
+        //Debug.Log("la countes "+contentPanel.childCount);
 
         //setUpElementoMenu(newButton);
 
@@ -148,7 +209,7 @@ public class RecursosManager : MonoBehaviour
         newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
         newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count-1).GetComponent<Button>();
         contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
-        Debug.Log("el ingredeinte es: "+ contentPanel.GetChild(listaIngredientes.Count).gameObject.name);
+        //Debug.Log("el ingredeinte es: "+ contentPanel.GetChild(listaIngredientes.Count).gameObject.name);
 
         // navegacion ultimo ingredeintes
         newNav = new Navigation();
@@ -185,7 +246,7 @@ public class RecursosManager : MonoBehaviour
 
             setUpElementoMenu(newButton);
 
-            definirNavegacion(i, newButton);
+            definirNavegacionRecursos(i, newButton);
 
         }
 
@@ -197,6 +258,8 @@ public class RecursosManager : MonoBehaviour
 
     public void addBotonesParaCortar()
     {
+        int posListaUsables = 0;
+
         for (int i = 0; i < listaIngredientes.Count; i++)
         {
             //if (listaIngredientes[i].GetComponent<POEstado>()==null) { Debug.Log("el estado es null"); }
@@ -216,7 +279,8 @@ public class RecursosManager : MonoBehaviour
 
                 setUpElementoMenu(newButton);
 
-                definirNavegacion(i, newButton);
+                definirNavegacionRecursos(posListaUsables, newButton);
+                posListaUsables++;
             }
         }
 
@@ -228,6 +292,8 @@ public class RecursosManager : MonoBehaviour
 
     public void addBotonesParaCocinar()
     {
+        int posListaUsables = 0;
+
         for (int i = 0; i < listaIngredientes.Count; i++)
         {
             if (!listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
@@ -246,7 +312,8 @@ public class RecursosManager : MonoBehaviour
 
                 setUpElementoMenu(newButton);
 
-                definirNavegacion(i, newButton);
+                definirNavegacionRecursos(i, newButton);
+                posListaUsables++;
             }
         }
 
