@@ -259,10 +259,11 @@ public class BattleMenuManager : MonoBehaviour
     // Mezcla los ingredientes que fueron seleccionados en la acción de mezclar
     public void mezclarIngredientesListos()
     {
+        Debug.Log("A_Mezclar");
         List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
-        Debug.Log(Accion.instance.getNumeroDeIngredientes()+"es el num deingre");
+        /*Debug.Log(Accion.instance.getNumeroDeIngredientes()+"es el num deingre");
         Debug.Log(listaIngreEnAccion[0].GetComponent<POIngrediente>().getNombre() +" es el nombre 0");
-        Debug.Log(listaIngreEnAccion[1].GetComponent<POIngrediente>().getNombre() + " es el nombre 1");
+        Debug.Log(listaIngreEnAccion[1].GetComponent<POIngrediente>().getNombre() + " es el nombre 1");*/
         POIngrediente primero = listaIngreEnAccion[0].GetComponent<POIngrediente>(); //ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
         if (primero==null) { Debug.Log("primero es null"); }
         List<POIngrediente> lista = new List<POIngrediente>();
@@ -279,8 +280,9 @@ public class BattleMenuManager : MonoBehaviour
             lista.Add(temp);
             GameManager.instance.sacarDeInventario(temp); //listaTotalIngredientes.Remove(temp.gameObject);
             if (temp == null) { Debug.Log("el tempo es null"); }
-            if (lista[0]!=null) { Debug.Log("nombre 0 en lista es " + lista[0].getNombre()); };
+            if (lista[0]!=null) { Debug.Log("lista[0] nombre es " + lista[0].getNombre()); };
         }
+        Debug.Log("nombre primero es"+primero.getNombre());
         primero.mezclar(lista);
         GameManager.instance.agregarEnInventario(primero); //listaTotalIngredientes.Add(primero.gameObject);
     }

@@ -20,6 +20,7 @@ public class PobladorDeBotones : MonoBehaviour
 
     public void addButtons(List<POIngrediente> listaIngredientes)
     {
+        Debug.Log("Fui llamado a poblar botones");
         for (int i = 0; i < listaIngredientes.Count; i++)
         {
             POIngrediente esteIngredeinte = listaIngredientes[i];       // Saca el PO de la lista

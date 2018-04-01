@@ -13,6 +13,7 @@ public class BotonRecurso : MonoBehaviour
 
     public void inicializarValoresBoton(GameObject objetoIngrediente)
     {
+        //Debug.Log("inicializo los botones");
         ingredienteStats = objetoIngrediente.GetComponent<POIngrediente>();
         nombreBoton.text = ingredienteStats.getNombre();
     }

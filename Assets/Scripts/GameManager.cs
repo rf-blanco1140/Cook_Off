@@ -86,6 +86,9 @@ public class GameManager : MonoBehaviour
     
     public void agregarEnInventario(POIngrediente aAgregar)
     {
+        Debug.Log("dentro de inventario nombre es "+aAgregar.getNombre());
         inventario.Add(aAgregar);
+        Debug.Log("hay "+(inventario.Count-1)+" posisione en ingredeintes");
+        Debug.Log("nombre ultimo elemento lista es "+inventario[inventario.Count-1].getNombre());
     }
 }
