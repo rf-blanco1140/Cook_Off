@@ -83,8 +83,20 @@ public class ElementoMenu : MonoBehaviour, ISelectHandler, IDeselectHandler
 		{
             if(panelHijo != null && hijo != null)
             {
+                if (panelHijo == null) { Debug.Log("panHijo null"); }
+                if (hijo==null) { Debug.Log("hijo null"); }
+                if (hijo.GetComponent<ElementoMenu>()==null) { Debug.Log(" hijo comp ElMen null"); }
+                if (hijo.GetComponent<ElementoMenu>().padre==null) { Debug.Log("hijo comp ElMen pater null"); }
+                if (GetComponent<Button>()==null) { Debug.Log("this comp button null"); }
+                if (evSys==null) { Debug.Log("evSys null"); }
+                //if () { Debug.Log(); }
+
                 panelHijo.SetActive(true);
-                hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
+                if(hijo.GetComponent<ElementoMenu>().padre != null)
+                {
+                    hijo.GetComponent<ElementoMenu>().padre = GetComponent<Button>();
+                }
+                
                 evSys.SetSelectedGameObject(hijo.gameObject);
             }
 		}

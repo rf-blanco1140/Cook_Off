@@ -31,9 +31,7 @@ public class RecursosManager : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.getInventario() != null)
         {
-            listaIngredientes = GameManager.instance.getInventario();
-            RemoveButtons();
-            addButtons();
+            poblar();
         }
     }
 
@@ -58,6 +56,8 @@ public class RecursosManager : MonoBehaviour
 
     private void RemoveButtons()
     {
+        okButton.transform.SetParent(botonPadre.transform);
+
         while (contentPanel.childCount > 0)
         {
             GameObject toRemove = transform.GetChild(0).gameObject;

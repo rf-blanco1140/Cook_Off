@@ -90,6 +90,12 @@ public class BattleMenuManager : MonoBehaviour
     // Metodo que guarda la ultima accion seleccionada
     public void seleccionarAccion(GameObject pAccionSeleccionada)
     {
+        if (pAccionSeleccionada == null) { Debug.Log("objeto null"); }
+        if (pAccionSeleccionada.name == null) { Debug.Log("nombre null"); }
+        if (pAccionSeleccionada.GetComponentInChildren<Text>()==null) { Debug.Log("compont txt null"); }
+        if (pAccionSeleccionada.GetComponentInChildren<Text>().text==null) { Debug.Log("texto null"); }
+        //if (accionSeleccionada == null) { Debug.Log("accSelct null"); }
+        if (accionSeleccionada!=null) { Debug.Log("accSelct NOT null"); }
         accionSeleccionada = pAccionSeleccionada;
         string nombreAcc = accionSeleccionada.GetComponentInChildren<Text>().text;
     }
