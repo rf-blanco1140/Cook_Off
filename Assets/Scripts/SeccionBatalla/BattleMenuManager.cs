@@ -260,15 +260,26 @@ public class BattleMenuManager : MonoBehaviour
     public void mezclarIngredientesListos()
     {
         List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
+        Debug.Log(Accion.instance.getNumeroDeIngredientes()+"es el num deingre");
+        Debug.Log(listaIngreEnAccion[0].GetComponent<POIngrediente>().getNombre() +" es el nombre 0");
+        Debug.Log(listaIngreEnAccion[1].GetComponent<POIngrediente>().getNombre() + " es el nombre 1");
         POIngrediente primero = listaIngreEnAccion[0].GetComponent<POIngrediente>(); //ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
         if (primero==null) { Debug.Log("primero es null"); }
         List<POIngrediente> lista = new List<POIngrediente>();
         GameManager.instance.sacarDeInventario(primero); //listaTotalIngredientes.Remove(primero.gameObject);
-        for (int i = 1; i < ingredientesListosParaUsar.Count; i++)
+        for (int i = 1; i < Accion.instance.getNumeroDeIngredientes(); i++)//ingredientesListosParaUsar.Count; i++)
         {
-            POIngrediente temp = ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
+            if (ingredientesListosParaUsar[i] == null) { Debug.Log("el origen del tiempo es null"); }
+            List<GameObject> lisIngredeintes = Accion.instance.getListaIngredeintesEnAccion();
+            if (lisIngredeintes == null) { Debug.Log("la lista es nula"); }
+            GameObject ingredientSubI = lisIngredeintes[i];
+            if (ingredientSubI==null) { Debug.Log("el ingredeinte "+i+"es null"); }
+            POIngrediente temp = ingredientSubI.GetComponent<POIngrediente>(); //ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
+            //if () { Debug.Log(""); }
             lista.Add(temp);
             GameManager.instance.sacarDeInventario(temp); //listaTotalIngredientes.Remove(temp.gameObject);
+            if (temp == null) { Debug.Log("el tempo es null"); }
+            if (lista[0]!=null) { Debug.Log("nombre 0 en lista es " + lista[0].getNombre()); };
         }
         primero.mezclar(lista);
         GameManager.instance.agregarEnInventario(primero); //listaTotalIngredientes.Add(primero.gameObject);

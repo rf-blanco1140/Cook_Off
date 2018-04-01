@@ -60,6 +60,8 @@ public class POIngrediente : MonoBehaviour
     // Retorna el nombre del ingrediente
     public string getNombre()
     {
+        
+
         string cadena = "";
         if(componentes == null || componentes.Count == 0)
         {
@@ -67,6 +69,14 @@ public class POIngrediente : MonoBehaviour
         }
         else
         {
+            if (componentes != null && componentes.Count != 0) { Debug.Log("los componentes son " + componentes.Count); }
+            if (componentes==null) { Debug.Log("todos componentes null"); }
+            //if (componentes[1] == null) { Debug.Log("segundo componente null"); }
+            if (componentes[0]==null) { Debug.Log("primer componente null"); }
+            if (componentes[0].getNombre() == null) { Debug.Log("nombre comp 0 es null"); }
+            /*Debug.Log("nombre de 0 es "+componentes[0].getNombre());
+            Debug.Log("nombre de 1 es " + componentes[1].getNombre());*/
+
             cadena = nombre + " (";
             foreach(POIngrediente ingrediente in componentes)
             {
@@ -177,7 +187,8 @@ public class POIngrediente : MonoBehaviour
 	{
 		foreach(POIngrediente ingrediente in pIngredientes)
 		{
-			componentes.Add(ingrediente);
+            if (ingrediente == null) { Debug.Log("ingredeinte null"); }
+            componentes.Add(ingrediente);
 		}
 	}
 

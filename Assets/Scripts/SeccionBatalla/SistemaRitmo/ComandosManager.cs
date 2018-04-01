@@ -47,7 +47,7 @@ public class ComandosManager : MonoBehaviour
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
-        Debug.Log("ejecuto accion");
+        //Debug.Log("ejecuto accion");
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         if (numIngredeintes>0)
         {
@@ -176,11 +176,11 @@ public class ComandosManager : MonoBehaviour
     // Mezcla los ingredientes
     public void comandosMezclaAMano()
     {
-        Debug.Log("pase como sapo");
+        //Debug.Log("pase como sapo");
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         int limiteFor = numIngredeintes;
         Comando[] newComandos = new Comando[limiteFor*4];
-        Debug.Log(limiteFor);
+        //Debug.Log(limiteFor);
 
         for (int i = 0; i < limiteFor; i++)
         {
@@ -197,7 +197,7 @@ public class ComandosManager : MonoBehaviour
             nuevoComando.configurar(KeyCode.DownArrow);
             newComandos[4*i+3] = nuevoComando;
         }
-        if (newComandos[5]) { Debug.Log("el comando 6 es nulo"); }
+        //if (newComandos[5]) { Debug.Log("el comando 6 es nulo"); }
 
         comandosActualesTotales = newComandos.Length;
         GeneradorComandos.instance.configurarComandos(newComandos);

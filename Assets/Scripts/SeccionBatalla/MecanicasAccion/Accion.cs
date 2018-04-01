@@ -51,7 +51,7 @@ public class Accion : MonoBehaviour
     // Devuelve el numero de ingredientes que se van a ausar en la subaccion
     public int getNumeroDeIngredientes()
     {
-        return posEnListaIngredeintesQueUsara;
+        return ingredeintesQueUsara.Count; //posEnListaIngredeintesQueUsara;
     }
 
     // Selecciona los ingredientes que se van a usar en cada accion
