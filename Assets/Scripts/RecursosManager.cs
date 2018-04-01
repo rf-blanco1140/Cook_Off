@@ -230,29 +230,21 @@ public class RecursosManager : MonoBehaviour
 
     public void addButtons()
     {
-        Debug.Log("va a adicionar botones");
         Debug.Log("En RM la lista de ingredeintes tiene "+(listaIngredientes.Count-1)+" posiciones en ingredientes");
         List<POIngrediente> refDeb = GameManager.instance.getInventario();
-        Debug.Log("elemento final directo antes de FOR es "+refDeb[refDeb.Count-1].getNombre());
-        Debug.Log("elemento final intermedio antes de FOR es " + listaIngredientes[listaIngredientes.Count - 1].getNombre());
         for (int i = 0; i < listaIngredientes.Count; i++)
         {
-            //if (i == 0) { Debug.Log("el inicio el valor final es "+ listaIngredientes[listaIngredientes.Count - 1].getNombre()); }//"dento de for el valor final antes de extraccion es "+ listaIngredientes[listaIngredientes.Count - 1].getNombre()) ; }
-            if (listaIngredientes[listaIngredientes.Count - 1].getNombre() != "agua") { Debug.Log("Ya es diferente en la posicion "+i); }
             POIngrediente esteIngredeinte = null;
             esteIngredeinte = listaIngredientes[i];
-            //if (i==(listaIngredientes.Count-1)) { Debug.Log("las posiscion es "+ i +"el nombre puro del ingrediente final es "+esteIngredeinte.getNombre()); }
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
 
             POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
-            /*if (i == (listaIngredientes.Count - 1) || i == (listaIngredientes.Count))
-            { Debug.Log("el nombre original del boton es " + ingreStats.getNombre()); }*/
+            ingreStats.Limpiar();
             ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
             ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
             ingreStats.definirNombre(esteIngredeinte.getNombre());
-            /*if (i == (listaIngredientes.Count - 1) || i == (listaIngredientes.Count))
-            { Debug.Log("El nombre post produccion del boton es " + ingreStats.getNombre()); }*/
+            ingreStats.definirComponentes(esteIngredeinte.darComponentes());
 
             BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
             nuevoElementoMenu.inicializarValoresBoton(newButton);

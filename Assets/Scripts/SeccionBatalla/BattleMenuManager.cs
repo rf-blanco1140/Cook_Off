@@ -261,30 +261,20 @@ public class BattleMenuManager : MonoBehaviour
     {
         Debug.Log("A_Mezclar");
         List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
-        /*Debug.Log(Accion.instance.getNumeroDeIngredientes()+"es el num deingre");
-        Debug.Log(listaIngreEnAccion[0].GetComponent<POIngrediente>().getNombre() +" es el nombre 0");
-        Debug.Log(listaIngreEnAccion[1].GetComponent<POIngrediente>().getNombre() + " es el nombre 1");*/
         POIngrediente primero = listaIngreEnAccion[0].GetComponent<POIngrediente>(); //ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
         if (primero==null) { Debug.Log("primero es null"); }
         List<POIngrediente> lista = new List<POIngrediente>();
-        GameManager.instance.sacarDeInventario(primero); //listaTotalIngredientes.Remove(primero.gameObject);
+        GameManager.instance.sacarDeInventario(primero.getNombre()); //listaTotalIngredientes.Remove(primero.gameObject);
         for (int i = 1; i < Accion.instance.getNumeroDeIngredientes(); i++)//ingredientesListosParaUsar.Count; i++)
         {
-            if (ingredientesListosParaUsar[i] == null) { Debug.Log("el origen del tiempo es null"); }
             List<GameObject> lisIngredeintes = Accion.instance.getListaIngredeintesEnAccion();
-            if (lisIngredeintes == null) { Debug.Log("la lista es nula"); }
             GameObject ingredientSubI = lisIngredeintes[i];
-            if (ingredientSubI==null) { Debug.Log("el ingredeinte "+i+"es null"); }
-            POIngrediente temp = ingredientSubI.GetComponent<POIngrediente>(); //ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
-            //if () { Debug.Log(""); }
+            POIngrediente temp = ingredientSubI.GetComponent<POIngrediente>();
             lista.Add(temp);
-            GameManager.instance.sacarDeInventario(temp); //listaTotalIngredientes.Remove(temp.gameObject);
-            if (temp == null) { Debug.Log("el tempo es null"); }
-            if (lista[0]!=null) { Debug.Log("lista[0] nombre es " + lista[0].getNombre()); };
+            GameManager.instance.sacarDeInventario(temp.getNombre()); //listaTotalIngredientes.Remove(temp.gameObject);
         }
-        Debug.Log("nombre primero es"+primero.getNombre());
         primero.mezclar(lista);
-        GameManager.instance.agregarEnInventario(primero); //listaTotalIngredientes.Add(primero.gameObject);
+        GameManager.instance.agregarEnInventario(primero);
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

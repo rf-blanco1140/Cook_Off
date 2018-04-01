@@ -57,6 +57,32 @@ public class POIngrediente : MonoBehaviour
         nombre = pNombre;
     }
 
+    // Define el nombre del ingrediente
+    public void definirComponentes(List<POIngrediente> pIngredientes)
+    {
+        foreach(POIngrediente ingrediente in pIngredientes)
+        {
+            componentes.Add(ingrediente);
+        }
+    }
+
+    public List<POIngrediente> darComponentes()
+    {
+        return componentes;
+    }
+
+    public void Limpiar()
+    {
+        if (componentes != null)
+        {
+            componentes.Clear();
+        }
+        else
+        {
+            componentes = new List<POIngrediente>();
+        }
+    }
+
     // Retorna el nombre del ingrediente
     public string getNombre()
     {
@@ -67,29 +93,19 @@ public class POIngrediente : MonoBehaviour
         }
         else
         {
-            /*if (componentes != null && componentes.Count != 0) { Debug.Log("los componentes son " + componentes.Count); }
-            if (componentes==null) { Debug.Log("todos componentes null"); }
-            //if (componentes[1] == null) { Debug.Log("segundo componente null"); }
-            if (componentes[0]==null) { Debug.Log("primer componente null"); }
-            if (componentes[0].getNombre() == null) { Debug.Log("nombre comp 0 es null"); }
-            Debug.Log("nombre de 0 es "+componentes[0].getNombre());
-            Debug.Log("nombre de 1 es " + componentes[1].getNombre());*/
-
             cadena = nombre + " (";
-            //Debug.Log("el nombre original es "+nombre);
+            Debug.Log(componentes[0].darComponentes());
             foreach(POIngrediente ingrediente in componentes)
             {
-                cadena += ingrediente.getNombre() + ", ";
-                //Debug.Log("nombre post coma es "+nombre);
+                // LA LINEA DEL DEMONIO
+                //cadena = cadena + ingrediente.getNombre() + ", ";
             }
-            //Debug.Log("nombre pre final es "+nombre);
             cadena = cadena.Substring(0, cadena.Length - 2);
             cadena += ")";
-            //Debug.Log("nombre post corchete es "+nombre);
         }
 
         //Debug.Log("nombre retornado es "+nombre);
-        return nombre;
+        return cadena;
     }
 
 	// Retorna el valor numérico del sabor especificado. En caso de tratarse de una mezcla,
@@ -189,9 +205,8 @@ public class POIngrediente : MonoBehaviour
 	// Adiciona los ingredientes especificados a la lista de componentes
 	public void mezclar(List<POIngrediente> pIngredientes)
 	{
-		foreach(POIngrediente ingrediente in pIngredientes)
+        foreach(POIngrediente ingrediente in pIngredientes)
 		{
-            if (ingrediente == null) { Debug.Log("ingredeinte null"); }
             componentes.Add(ingrediente);
 		}
 	}
