@@ -47,6 +47,7 @@ public class ComandosManager : MonoBehaviour
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
+
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         if (numIngredeintes>0)
         {
