@@ -99,4 +99,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("hay "+(inventario.Count-1)+" posisione en ingredeintes");
         Debug.Log("nombre ultimo elemento lista es "+inventario[inventario.Count-1].getNombre());
     }
+
+    public POIngrediente getElementoInventario(int i)
+    {
+        return inventario[i];
+    }
 }

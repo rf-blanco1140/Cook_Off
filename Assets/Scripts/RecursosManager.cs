@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RecursosManager : MonoBehaviour
 {
     public SimpleObjectPool buttonObjectPool;
-    public List<POIngrediente> listaIngredientes;
+    //public List<int> listaIngredientes;
     public Transform contentPanel;
     private GameObject primerBotonEnLista;
     public Button botonPadre;
@@ -37,13 +37,13 @@ public class RecursosManager : MonoBehaviour
 
     public void poblar()
     {
-        listaIngredientes = GameManager.instance.getInventario();
+        //listaIngredientes = GameManager.instance.getInventario();
         RemoveButtons();
-        if(listaIngredientes[0].GetComponent<POEstado>() !=null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cortar")
+        if(GameManager.instance.getElementoInventario(0).GetComponent<POEstado>() !=null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cortar")
         {
             addBotonesParaCortar();
         }
-        else if(listaIngredientes[0].GetComponent<POEstado>() != null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cocinar")
+        else if(GameManager.instance.getElementoInventario(0).GetComponent<POEstado>() != null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cocinar")
         {
             addBotonesParaCocinar();
         }
@@ -73,7 +73,7 @@ public class RecursosManager : MonoBehaviour
         //Si es el ultimo el elemento de abajo es el primero
         Button esteBoton = newButton.GetComponent<Button>();
         Navigation btnNav = esteBoton.navigation;
-        if (i == (listaIngredientes.Count - 1) && i > 0)
+        if (i == (GameManager.instance.getInventario().Count-1) && i > 0) //(listaIngredientes.Count - 1) && i > 0)
         {
             //Debug.Log("esta en el final");
 
@@ -111,7 +111,7 @@ public class RecursosManager : MonoBehaviour
 
             contentPanel.GetChild(i - 1).gameObject.GetComponent<Button>().navigation = newNav;
         }
-        else if (i == (listaIngredientes.Count - 1) && i == 0)
+        else if (i == (GameManager.instance.getInventario().Count - 1) && i == 0)
         {
             Navigation newNav = new Navigation();
             newNav.mode = Navigation.Mode.Explicit;
@@ -139,7 +139,7 @@ public class RecursosManager : MonoBehaviour
         }
     }
 
-    public void definirNavegacionOk()
+    /*public void definirNavegacionOk()
     {
         if(listaIngredientes.Count == 0)
         {
@@ -193,7 +193,7 @@ public class RecursosManager : MonoBehaviour
 
             contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
         }
-    }
+    }*/
 
     public void addOkButton()
     {
@@ -207,47 +207,47 @@ public class RecursosManager : MonoBehaviour
         Navigation newNav = new Navigation();
         newNav.mode = Navigation.Mode.Explicit;
         newNav.selectOnDown = contentPanel.GetChild(0).GetComponent<Button>();
-        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count-1).GetComponent<Button>();
-        contentPanel.GetChild(listaIngredientes.Count).gameObject.GetComponent<Button>().navigation = newNav;
+        newNav.selectOnUp = contentPanel.GetChild((contentPanel.childCount - 2)).GetComponent<Button>(); //listaIngredientes.Count-1).GetComponent<Button>();
+        contentPanel.GetChild(contentPanel.childCount - 1).gameObject.GetComponent<Button>().navigation = newNav;
         //Debug.Log("el ingredeinte es: "+ contentPanel.GetChild(listaIngredientes.Count).gameObject.name);
 
         // navegacion ultimo ingredeintes
         newNav = new Navigation();
         newNav.mode = Navigation.Mode.Explicit;
-        newNav.selectOnDown = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
-        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count - 2).GetComponent<Button>();
+        newNav.selectOnDown = contentPanel.GetChild((contentPanel.childCount - 1)).GetComponent<Button>();
+        newNav.selectOnUp = contentPanel.GetChild((contentPanel.childCount - 3)).GetComponent<Button>();
 
-        contentPanel.GetChild(listaIngredientes.Count - 1).gameObject.GetComponent<Button>().navigation = newNav;
+        contentPanel.GetChild((contentPanel.childCount - 2)).gameObject.GetComponent<Button>().navigation = newNav;
 
         // Navegacion penultimo ingrdeinte
         newNav = new Navigation();
         newNav.mode = Navigation.Mode.Explicit;
         newNav.selectOnDown = contentPanel.GetChild(1).GetComponent<Button>();
-        newNav.selectOnUp = contentPanel.GetChild(listaIngredientes.Count).GetComponent<Button>();
+        newNav.selectOnUp = contentPanel.GetChild((contentPanel.childCount - 1)).GetComponent<Button>();
 
         contentPanel.GetChild(0).gameObject.GetComponent<Button>().navigation = newNav;
     }
 
     public void addButtons()
     {
-        Debug.Log("En RM la lista de ingredeintes tiene "+(listaIngredientes.Count-1)+" posiciones en ingredientes");
+        //Debug.Log("En RM la lista de ingredeintes tiene "+(listaIngredientes.Count-1)+" posiciones en ingredientes");
         List<POIngrediente> refDeb = GameManager.instance.getInventario();
-        for (int i = 0; i < listaIngredientes.Count; i++)
+        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
         {
             POIngrediente esteIngredeinte = null;
-            esteIngredeinte = listaIngredientes[i];
+            //esteIngredeinte = listaIngredientes[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
 
-            POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
+            /*POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
             ingreStats.Limpiar();
             ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
             ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
             ingreStats.definirNombre(esteIngredeinte.getNombre());
-            ingreStats.definirComponentes(esteIngredeinte.darComponentes());
+            ingreStats.definirComponentes(esteIngredeinte.darComponentes());*/
 
             BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-            nuevoElementoMenu.inicializarValoresBoton(newButton);
+            nuevoElementoMenu.inicializarValoresBoton(i);
 
             setUpElementoMenu(newButton);
 
@@ -265,22 +265,22 @@ public class RecursosManager : MonoBehaviour
     {
         int posListaUsables = 0;
 
-        for (int i = 0; i < listaIngredientes.Count; i++)
+        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
         {
             //if (listaIngredientes[i].GetComponent<POEstado>()==null) { Debug.Log("el estado es null"); }
-            if(!listaIngredientes[i].GetComponent<POEstado>().fueCortado())
+            if(GameManager.instance.getElementoInventario(i).darEstado().fueCortado() == false)  //listaIngredientes[i].GetComponent<POEstado>().fueCortado())
             {
-                POIngrediente esteIngredeinte = listaIngredientes[i];
+                //POIngrediente esteIngredeinte = listaIngredientes[i];
                 GameObject newButton = buttonObjectPool.GetObject();
                 newButton.transform.SetParent(contentPanel);
 
-                POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
+                /*POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
                 ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
                 ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
-                ingreStats.definirNombre(esteIngredeinte.getNombre());
+                ingreStats.definirNombre(esteIngredeinte.getNombre());*/
 
                 BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-                nuevoElementoMenu.inicializarValoresBoton(newButton);
+                nuevoElementoMenu.inicializarValoresBoton(i);
 
                 setUpElementoMenu(newButton);
 
@@ -299,21 +299,21 @@ public class RecursosManager : MonoBehaviour
     {
         int posListaUsables = 0;
 
-        for (int i = 0; i < listaIngredientes.Count; i++)
+        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
         {
-            if (!listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
+            if (!GameManager.instance.getElementoInventario(i).darEstado().fueCocinado()) //listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
             {
-                POIngrediente esteIngredeinte = listaIngredientes[i];
+                //POIngrediente esteIngredeinte = listaIngredientes[i];
                 GameObject newButton = buttonObjectPool.GetObject();
                 newButton.transform.SetParent(contentPanel);
 
-                POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
+                /*POIngrediente ingreStats = newButton.GetComponent<POIngrediente>();
                 ingreStats.configurarSabor(esteIngredeinte.darSabor(POIngrediente.Sabor.Dulce), esteIngredeinte.darSabor(POIngrediente.Sabor.Salado), esteIngredeinte.darSabor(POIngrediente.Sabor.Amargo), esteIngredeinte.darSabor(POIngrediente.Sabor.Acido), esteIngredeinte.darSabor(POIngrediente.Sabor.Umami));
                 ingreStats.configurarTextura(esteIngredeinte.darTextura(POIngrediente.Textura.Suave), esteIngredeinte.darTextura(POIngrediente.Textura.Crujiente), esteIngredeinte.darTextura(POIngrediente.Textura.Humedo), esteIngredeinte.darTextura(POIngrediente.Textura.Seco));
-                ingreStats.definirNombre(esteIngredeinte.getNombre());
+                ingreStats.definirNombre(esteIngredeinte.getNombre());*/
 
                 BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-                nuevoElementoMenu.inicializarValoresBoton(newButton);
+                nuevoElementoMenu.inicializarValoresBoton(i);
 
                 setUpElementoMenu(newButton);
 
