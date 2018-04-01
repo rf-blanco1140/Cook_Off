@@ -47,7 +47,7 @@ public class ComandosManager : MonoBehaviour
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
-
+        Debug.Log("ejecuto accion");
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         if (numIngredeintes>0)
         {
@@ -67,7 +67,7 @@ public class ComandosManager : MonoBehaviour
                     comandosCorteCuadros();
                     break;
                 case "A_Mano":
-                    comandosCorteJuliana();
+                    comandosMezclaAMano();
                     break;
                 case "Asar":
                     BattleMenuManager.instance.limpiarSubAccionSeleccionada();
@@ -155,7 +155,6 @@ public class ComandosManager : MonoBehaviour
     {
         Comando[] newComandos = new Comando[4];
 
-
         nuevoComando.configurar(KeyCode.LeftArrow);
             newComandos[0] = nuevoComando;
 
@@ -177,29 +176,32 @@ public class ComandosManager : MonoBehaviour
     // Mezcla los ingredientes
     public void comandosMezclaAMano()
     {
-
+        Debug.Log("pase como sapo");
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
         int limiteFor = numIngredeintes;
         Comando[] newComandos = new Comando[limiteFor*4];
+        Debug.Log(limiteFor);
 
         for (int i = 0; i < limiteFor; i++)
         {
             nuevoComando.configurar(KeyCode.LeftArrow);
-            newComandos[i+0] = nuevoComando;
+            newComandos[4*i+0] = nuevoComando;
+            
 
             nuevoComando.configurar(KeyCode.UpArrow);
-            newComandos[i+1] = nuevoComando;
+            newComandos[4*i+1] = nuevoComando;
 
             nuevoComando.configurar(KeyCode.RightArrow);
-            newComandos[i+2] = nuevoComando;
+            newComandos[4*i+2] = nuevoComando;
 
             nuevoComando.configurar(KeyCode.DownArrow);
-            newComandos[i+3] = nuevoComando;
+            newComandos[4*i+3] = nuevoComando;
         }
+        if (newComandos[5]) { Debug.Log("el comando 6 es nulo"); }
 
         comandosActualesTotales = newComandos.Length;
-        BattleMenuManager.instance.mezclarIngredientesListos();
         GeneradorComandos.instance.configurarComandos(newComandos);
+        BattleMenuManager.instance.mezclarIngredientesListos();
     }
 
 

@@ -259,17 +259,19 @@ public class BattleMenuManager : MonoBehaviour
     // Mezcla los ingredientes que fueron seleccionados en la acción de mezclar
     public void mezclarIngredientesListos()
     {
-        POIngrediente primero = ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
+        List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
+        POIngrediente primero = listaIngreEnAccion[0].GetComponent<POIngrediente>(); //ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
+        if (primero==null) { Debug.Log("primero es null"); }
         List<POIngrediente> lista = new List<POIngrediente>();
-        listaTotalIngredientes.Remove(primero.gameObject);
+        GameManager.instance.sacarDeInventario(primero); //listaTotalIngredientes.Remove(primero.gameObject);
         for (int i = 1; i < ingredientesListosParaUsar.Count; i++)
         {
             POIngrediente temp = ingredientesListosParaUsar[i].GetComponent<POIngrediente>();
             lista.Add(temp);
-            listaTotalIngredientes.Remove(temp.gameObject);
+            GameManager.instance.sacarDeInventario(temp); //listaTotalIngredientes.Remove(temp.gameObject);
         }
         primero.mezclar(lista);
-        listaTotalIngredientes.Add(primero.gameObject);
+        GameManager.instance.agregarEnInventario(primero); //listaTotalIngredientes.Add(primero.gameObject);
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

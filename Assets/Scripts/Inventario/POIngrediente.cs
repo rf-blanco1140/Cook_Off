@@ -48,6 +48,7 @@ public class POIngrediente : MonoBehaviour
 	void Start ()
     {
         if (estado == null) { estado = new POEstado(); }
+        componentes = new List<POIngrediente>();
     }
 
     // Define el nombre del ingrediente

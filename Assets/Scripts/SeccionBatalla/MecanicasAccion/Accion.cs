@@ -11,7 +11,7 @@ public class Accion : MonoBehaviour
 
     public static Accion instance = null;
 
-    private GameObject[] ingredeintesQueUsara = new GameObject[100];
+    private List<GameObject> ingredeintesQueUsara;
 
     private int posEnListaIngredeintesQueUsara;
 
@@ -40,7 +40,13 @@ public class Accion : MonoBehaviour
     void Start ()
     {
         posEnListaIngredeintesQueUsara = 0;
+        ingredeintesQueUsara = new List<GameObject>();
 	}
+
+    public List<GameObject> getListaIngredeintesEnAccion()
+    {
+        return ingredeintesQueUsara;
+    }
 
     // Devuelve el numero de ingredientes que se van a ausar en la subaccion
     public int getNumeroDeIngredientes()
@@ -51,7 +57,7 @@ public class Accion : MonoBehaviour
     // Selecciona los ingredientes que se van a usar en cada accion
     public void agregarIngredeintesParaAccion(GameObject objetoIngredeinte)
     {
-        ingredeintesQueUsara[posEnListaIngredeintesQueUsara] = objetoIngredeinte;
+        ingredeintesQueUsara.Add(objetoIngredeinte);
         posEnListaIngredeintesQueUsara++;
 
         //imprimirObjetosEnLista();
@@ -67,7 +73,8 @@ public class Accion : MonoBehaviour
         {
             if (nombreObjeto == ingredeintesQueUsara[i].name)
             {
-                if(i < posEnListaIngredeintesQueUsara)
+                ingredeintesQueUsara.RemoveAt(i);
+                /*if(i < posEnListaIngredeintesQueUsara)
                 {
                     for (int j = i; j < posEnListaIngredeintesQueUsara; j++)
                     {
@@ -77,7 +84,7 @@ public class Accion : MonoBehaviour
                     ingredeintesQueUsara[posEnListaIngredeintesQueUsara] = null;
                     loEncontro = true;
                     posEnListaIngredeintesQueUsara--;
-                }
+                }*/
             }
         }
 

@@ -56,8 +56,15 @@ public class GeneradorComandos : MonoBehaviour
 	// le da la orden de que empiece su desplazamiento, y espera para producir el siguiente.
 	private IEnumerator Reproducir()
 	{
+        //
+        int rondasDebug = 0;
+        Debug.Log("la cantidad de comandos es "+comandos.Length);
+        //
 		foreach(Comando com in comandos)
 		{
+            Debug.Log("mira comandos a crear, esta en ronda "+rondasDebug);
+            if (com == null) { Debug.Log("el comando es null"); }
+            else { Debug.Log("el comando NO es null"); }
 			GameObject temp = pool.GetObject();
 			temp.transform.SetParent(this.transform);
 			Comando actual = temp.GetComponent<Comando>();
@@ -66,8 +73,10 @@ public class GeneradorComandos : MonoBehaviour
 			actual.configurarPuntos(inicio.position, fin.position);
 			actual.configurar(com.darTecla());	
 			actual.empezar();
+            rondasDebug++; //////////////////////////////////////////////////////////////////////////////////
 			yield return new WaitForSeconds(delayComandos);		
 		}
+        Debug.Log("termina");
 		yield return new WaitForSeconds(5f);
         ComandosManager.instance.revisarSiTerminarSistemaRitmo();
 	}
@@ -79,6 +88,7 @@ public class GeneradorComandos : MonoBehaviour
 
     public void configurarComandos(Comando[] nuevos)
     {
+        Debug.Log("configuro comandos");
         comandos = nuevos;
     }
 }

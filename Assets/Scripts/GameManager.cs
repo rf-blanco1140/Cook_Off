@@ -79,6 +79,13 @@ public class GameManager : MonoBehaviour
         return enciclopedia;
     }
 
+    public void sacarDeInventario(POIngrediente aSacar)
+    {
+        inventario.Remove(aSacar);
+    }
     
-    
+    public void agregarEnInventario(POIngrediente aAgregar)
+    {
+        inventario.Add(aAgregar);
+    }
 }
