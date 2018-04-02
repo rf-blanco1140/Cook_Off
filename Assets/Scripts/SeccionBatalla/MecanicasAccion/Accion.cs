@@ -78,7 +78,7 @@ public class Accion : MonoBehaviour
         bool loEncontro = false;
         string nombreObjeto = objetoRetirar.name;
 
-        for(int i=0; !loEncontro && (i < (posEnListaIngredeintesQueUsara+1)); i++)
+        for(int i=0; !loEncontro && (i < (posEnListaIngredeintesQueUsara)); i++)
         {
             if (nombreObjeto == ingredeintesQueUsara[i].name)
             {

@@ -55,6 +55,7 @@ public class RecursosManager : MonoBehaviour
         while (contentPanel.childCount > 0)
         {
             GameObject toRemove = transform.GetChild(0).gameObject;
+            toRemove.GetComponent<ElementoRecursos>().unHiligtButton();
             buttonObjectPool.ReturnObject(toRemove);
         }
     }
