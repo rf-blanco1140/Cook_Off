@@ -477,7 +477,7 @@ Prefab:
     - target: {fileID: 114250846924958996, guid: 0afeebb1e765b42708c89c362956bff1,
         type: 2}
       propertyPath: defaultText
-      value: Toma estos ingredeintes
+      value: Toma estos ingredientes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0afeebb1e765b42708c89c362956bff1, type: 2}

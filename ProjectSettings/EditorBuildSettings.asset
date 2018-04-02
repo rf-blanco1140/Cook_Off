@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/EscenaMapa.unity
+    guid: ae289533af6d241428fd86b5ffd19324
+  - enabled: 1
     path: Assets/Scenes/EscenaBatalla.unity
     guid: 963fe4816f235494dbb77d9c558a8d23
