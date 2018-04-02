@@ -44,16 +44,30 @@ public class IngredientLoader : MonoBehaviour
 
     private void LeerData()
     {
-        string path = "Assets/Resources/ingredients.txt";
+        //string path = "Assets/Resources/ingredients.txt";
 
-        StreamReader reader = new StreamReader(path); 
+        //StreamReader reader = new StreamReader(path); 
+        string[] ing = new string[10];
+        ing[0] = "salmón; dulce: 0; salado: 5; amargo: 2; acido: 0; umami: 3; crujiente: false; humedo: true; seco: false; suave: true; requiereCorte: true; requiereCoccion: false";
+        ing[1] = "limón; dulce: 0; salado: 0; amargo: 3; acido: 7; umami: 1; crujiente: false; humedo: true; seco: false; suave: false; requiereCorte: true; requiereCoccion: false";
+        ing[2] = "ajo; dulce: 0; salado: 0; amargo: 7; acido: 3; umami: 0; crujiente: true; humedo: true; seco: false; suave: false; requiereCorte: true; requiereCoccion: true";
+        ing[3] = "tomate; dulce: 3; salado: 0; amargo: 0; acido: 1; umami: 1; crujiente: false; humedo: true; seco: false; suave: true; requiereCorte: true; requiereCoccion: true";
+        ing[4] = "cebolla; dulce: 0; salado: 0; amargo: 3; acido: 7; umami: 1; crujiente: true; humedo: false; seco: false; suave: false; requiereCorte: true; requiereCoccion: true";
+        ing[5] = "sal; dulce: 0; salado: 6; amargo: 0; acido: 0; umami: 1; crujiente: false; humedo: false; seco: true; suave: false; requiereCorte: false; requiereCoccion: false";
+        ing[6] = "pimienta; dulce: 0; salado: 3; amargo: 2; acido: 2; umami: 1; crujiente: false; humedo: false; seco: true; suave: false; requiereCorte: false; requiereCoccion: false";
+        ing[7] = "huevo; dulce: 0; salado: 0; amargo: 0; acido: 0; umami: 3; crujiente: false; humedo: true; seco: false; suave: true; requiereCorte: false; requiereCoccion: true";
+        ing[8] = "leche; dulce: 3; salado: 0; amargo: 0; acido: 0; umami: 1; crujiente: false; humedo: true; seco: false; suave: false; requiereCorte: false; requiereCoccion: true";
+        ing[9] = "queso; dulce: 0; salado: 3; amargo: 0; acido: 0; umami: 3; crujiente: false; humedo: true; seco: false; suave: true; requiereCorte: true; requiereCoccion: true";
 
         //El formato es:
         //nombre;dulce:0;salado:0;amargo:0;acido:0;umami:0;crujiente:true;humedo:true;seco:true;suave:true
-        string lineaActual = reader.ReadLine();
+        int i = 0;
 
-        while(lineaActual != null)
+        while(i < 10)
         {
+            string lineaActual = ing[i];
+            lineaActual = lineaActual.Replace(" ", "");
+
             string[] atributos = lineaActual.Split(new string[] { ";", ":" }, StringSplitOptions.None);
             
             string nombre = atributos[0];
@@ -76,9 +90,10 @@ public class IngredientLoader : MonoBehaviour
             temp.configurarTextura(suave, crujiente, humedo, seco);
             temp.configurar(corte, coccion);
             ingredientes.Add(temp);
-            lineaActual = reader.ReadLine();
+            //lineaActual = reader.ReadLine();
+            i++;
         }
-        reader.Close();
+        //reader.Close();
     }
 
     public List<POIngrediente> darIngredientes()
