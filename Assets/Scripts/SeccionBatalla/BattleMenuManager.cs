@@ -248,21 +248,19 @@ public class BattleMenuManager : MonoBehaviour
         SistemaDePuntos.instance.evaluarPlatoFinal(darIngredientesServidos());
     }
 
-    public List<int> darIngredientesServidos()
+    public List<POIngrediente> darIngredientesServidos()
     {
-        /*
-        List<int> servidos = new List<int>();
-        for(int i=0; i<GameManager.instance.getInventario().Count;i++)//foreach(GameObject ingrediente in listaTotalIngredientes)
+        
+        List<POIngrediente> servidos = new List<POIngrediente>();
+        for(int i=0; i<IngredientLoader.instance.darIngredientes().Count;i++)//foreach(GameObject ingrediente in listaTotalIngredientes)
         {
             //POIngrediente elIngrediente = ingrediente.GetComponent<POIngrediente>();
-            if(GameManager.instance.getElementoInventario(i).estaServido())
+            if(IngredientLoader.instance.darIngredienteIndice(i).estaServido())
             {
-                servidos.Add(i);
+                servidos.Add(IngredientLoader.instance.darIngredienteIndice(i));
             }
         }
         return servidos;
-        */
-        return null;
     }
 
     // Method that manages the mouse click events so it dosn't fuck up everything else

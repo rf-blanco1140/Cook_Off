@@ -66,6 +66,17 @@ public class ComandosManager : MonoBehaviour
         }
     }
 
+    public void marcarIngredientesComoServido()
+    {
+        List<int> posIngredientesAccion = Accion.instance.getPosicionIngredeintesEnAccion();
+        for (int i = 0; i < posIngredientesAccion.Count; i++)
+        {
+            Debug.Log("cantidad de ing en acc " + posIngredientesAccion.Count);
+            Debug.Log("la pos cambio es " + posIngredientesAccion[i]);
+            IngredientLoader.instance.darIngredienteIndice(posIngredientesAccion[i]).servir();
+        }
+    }
+
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
@@ -115,12 +126,15 @@ public class ComandosManager : MonoBehaviour
                     break;
                 case "Elegante":
                     comandosCorteJuliana();
+                    marcarIngredientesComoServido();
                     break;
                 case "Divertido":
                     comandosCorteJuliana();
+                    marcarIngredientesComoServido();
                     break;
                 case "Sencillo":
                     comandosCorteJuliana();
+                    marcarIngredientesComoServido();
                     break;
             }
             BattleMenuManager.instance.lanzarSistemaRitmo();
