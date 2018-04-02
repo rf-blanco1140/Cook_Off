@@ -71,7 +71,8 @@ public class GeneradorComandos : MonoBehaviour
             actual.gameObject.GetComponent<Image>().color = Color.white;
 			actual.cuadrarPool(pool);
 			actual.configurarPuntos(inicio.position, fin.position);
-			actual.configurar(com.darTecla());	
+			actual.configurar(com.darTecla());
+            com.GetComponent<Eliminar>().Borrar();
 			actual.empezar();
             //rondasDebug++; //////////////////////////////////////////////////////////////////////////////////
 			yield return new WaitForSeconds(delayComandos);		

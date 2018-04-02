@@ -13,7 +13,7 @@ public class ComandosManager : MonoBehaviour
 
     private GameObject comandoObjetc;
 
-    private Comando nuevoComando;
+    SimpleObjectPool poolComandos;
 
 
     //Awake is always called before any Start functions
@@ -35,7 +35,7 @@ public class ComandosManager : MonoBehaviour
 
         comandoObjetc = new GameObject();
         comandoObjetc.AddComponent<Comando>();
-        nuevoComando = comandoObjetc.GetComponent<Comando>();
+        poolComandos = GetComponent<SimpleObjectPool>();
     }
 
     // Use this for initialization
@@ -44,6 +44,11 @@ public class ComandosManager : MonoBehaviour
         //nuevoComando = new Comando();
     }
 
+
+    public SimpleObjectPool darPool()
+    {
+        return poolComandos;
+    }
     public void marcarIngredientesComoCortados()
     {
         List<int> posIngredientesAccion = Accion.instance.getPosicionIngredeintesEnAccion();
@@ -153,15 +158,20 @@ public class ComandosManager : MonoBehaviour
     public void comandosCorteJuliana()
     {
         int numIngredeintes = Accion.instance.getNumeroDeIngredientes();
-        int limiteFor = numIngredeintes * 5;
-        Comando[] newComandos = new Comando[limiteFor];
+        int limiteFor = numIngredeintes;
+        Comando[] newComandos = new Comando[limiteFor*2];
 
         //for (int j=0; j < numIngredeintes; j++)
         //{
             for (int i = 0; i < limiteFor; i++)
             {
-                nuevoComando.configurar(KeyCode.UpArrow);
-                newComandos[i] = nuevoComando;
+            Comando temp = poolComandos.GetObject().GetComponent<Comando>();
+                temp.configurar(KeyCode.UpArrow);
+                newComandos[i*2] = temp;
+
+            Comando temp2 = poolComandos.GetObject().GetComponent<Comando>();
+            temp2.configurar(KeyCode.DownArrow);
+            newComandos[2*i+1] = temp2;
             }
         //}
         
@@ -176,16 +186,19 @@ public class ComandosManager : MonoBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            nuevoComando.configurar(KeyCode.UpArrow);
-            newComandos[i] = nuevoComando;
+            Comando temp = poolComandos.GetObject().GetComponent<Comando>();
+            temp.configurar(KeyCode.UpArrow);
+            newComandos[i] = temp;
             i++;
 
-            nuevoComando.configurar(KeyCode.RightArrow);
-            newComandos[i] = nuevoComando;
+            Comando temp1 = poolComandos.GetObject().GetComponent<Comando>();
+            temp1.configurar(KeyCode.RightArrow);
+            newComandos[i] = temp1;
             i++;
 
-            nuevoComando.configurar(KeyCode.DownArrow);
-            newComandos[i] = nuevoComando;
+            Comando temp2 = poolComandos.GetObject().GetComponent<Comando>();
+            temp2.configurar(KeyCode.DownArrow);
+            newComandos[i] = temp2;
         }
 
         comandosActualesTotales = newComandos.Length;
@@ -197,17 +210,21 @@ public class ComandosManager : MonoBehaviour
     {
         Comando[] newComandos = new Comando[4];
 
-        nuevoComando.configurar(KeyCode.LeftArrow);
-            newComandos[0] = nuevoComando;
+        Comando temp = poolComandos.GetObject().GetComponent<Comando>();
+        temp.configurar(KeyCode.LeftArrow);
+            newComandos[0] = temp;
 
-        nuevoComando.configurar(KeyCode.UpArrow);
-            newComandos[1] = nuevoComando;
+        Comando temp1 = poolComandos.GetObject().GetComponent<Comando>();
+        temp1.configurar(KeyCode.UpArrow);
+            newComandos[1] = temp1;
 
-        nuevoComando.configurar(KeyCode.DownArrow);
-            newComandos[2] = nuevoComando;
+        Comando temp2 = poolComandos.GetObject().GetComponent<Comando>();
+        temp2.configurar(KeyCode.DownArrow);
+            newComandos[2] = temp2;
 
-        nuevoComando.configurar(KeyCode.RightArrow);
-            newComandos[3] = nuevoComando;
+        Comando temp3 = poolComandos.GetObject().GetComponent<Comando>();
+        temp3.configurar(KeyCode.RightArrow);
+            newComandos[3] = temp3;
 
 
         comandosActualesTotales = newComandos.Length;
@@ -226,18 +243,21 @@ public class ComandosManager : MonoBehaviour
 
         for (int i = 0; i < limiteFor; i++)
         {
-            nuevoComando.configurar(KeyCode.LeftArrow);
-            newComandos[4*i+0] = nuevoComando;
+            Comando temp = poolComandos.GetObject().GetComponent<Comando>();
+            temp.configurar(KeyCode.LeftArrow);
+            newComandos[4*i+0] = temp;
             
+            Comando temp1 = poolComandos.GetObject().GetComponent<Comando>();
+            temp1.configurar(KeyCode.UpArrow);
+            newComandos[4*i+1] = temp1;
 
-            nuevoComando.configurar(KeyCode.UpArrow);
-            newComandos[4*i+1] = nuevoComando;
+            Comando temp2 = poolComandos.GetObject().GetComponent<Comando>();
+            temp2.configurar(KeyCode.RightArrow);
+            newComandos[4*i+2] = temp2;
 
-            nuevoComando.configurar(KeyCode.RightArrow);
-            newComandos[4*i+2] = nuevoComando;
-
-            nuevoComando.configurar(KeyCode.DownArrow);
-            newComandos[4*i+3] = nuevoComando;
+            Comando temp3 = poolComandos.GetObject().GetComponent<Comando>();
+            temp3.configurar(KeyCode.DownArrow);
+            newComandos[4*i+3] = temp3;
         }
         //if (newComandos[5]) { Debug.Log("el comando 6 es nulo"); }
 

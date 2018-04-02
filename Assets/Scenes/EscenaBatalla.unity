@@ -1742,7 +1742,7 @@ Prefab:
     - target: {fileID: 114767811002528028, guid: 9f60c3175651cb643b590cc71ab1479f,
         type: 2}
       propertyPath: delayComandos
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f60c3175651cb643b590cc71ab1479f, type: 2}
@@ -5161,6 +5161,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd06109daf13114a9fdccf44ca2b0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &921339519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 921339517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a565c8fcb400a48079219576b1535c3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1434510093437108, guid: 2ae434da6bfd746bc89eca4478a46101, type: 2}
 --- !u!1 &943053323
 GameObject:
   m_ObjectHideFlags: 0

@@ -292,8 +292,8 @@ public class RecursosManager : MonoBehaviour
 
         for (int i = 0; i < IngredientLoader.instance.darIngredientes().Count; i++)
         {
-            if (!IngredientLoader.instance.darIngredienteIndice(i).darEstado().fueCocinado()) //listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
-            {
+            //if (!IngredientLoader.instance.darIngredienteIndice(i).darEstado().fueCocinado()) //listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
+            //{
                 //POIngrediente esteIngredeinte = listaIngredientes[i];
                 GameObject newButton = buttonObjectPool.GetObject();
                 newButton.transform.SetParent(contentPanel);
@@ -310,7 +310,7 @@ public class RecursosManager : MonoBehaviour
 
                 definirNavegacionRecursos(posListaUsables, newButton);
                 posListaUsables++;
-            }
+            //}
         }
 
         // Selecciona el primer boton
