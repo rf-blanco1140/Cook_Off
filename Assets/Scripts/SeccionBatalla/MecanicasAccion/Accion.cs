@@ -11,6 +11,8 @@ public class Accion : MonoBehaviour
 
     public static Accion instance = null;
 
+    private List<int> posIngredeintesEnAccion;
+
     private List<GameObject> ingredeintesQueUsara;
 
     private int posEnListaIngredeintesQueUsara;
@@ -41,11 +43,17 @@ public class Accion : MonoBehaviour
     {
         posEnListaIngredeintesQueUsara = 0;
         ingredeintesQueUsara = new List<GameObject>();
+        posIngredeintesEnAccion = new List<int>();
 	}
 
     public List<GameObject> getListaIngredeintesEnAccion()
     {
         return ingredeintesQueUsara;
+    }
+
+    public List<int> getPosicionIngredeintesEnAccion()
+    {
+        return posIngredeintesEnAccion;
     }
 
     // Devuelve el numero de ingredientes que se van a ausar en la subaccion
@@ -55,8 +63,9 @@ public class Accion : MonoBehaviour
     }
 
     // Selecciona los ingredientes que se van a usar en cada accion
-    public void agregarIngredeintesParaAccion(GameObject objetoIngredeinte)
+    public void agregarIngredeintesParaAccion(GameObject objetoIngredeinte, int posicion)
     {
+        posIngredeintesEnAccion.Add(posicion);
         ingredeintesQueUsara.Add(objetoIngredeinte);
         posEnListaIngredeintesQueUsara++;
 
@@ -74,17 +83,7 @@ public class Accion : MonoBehaviour
             if (nombreObjeto == ingredeintesQueUsara[i].name)
             {
                 ingredeintesQueUsara.RemoveAt(i);
-                /*if(i < posEnListaIngredeintesQueUsara)
-                {
-                    for (int j = i; j < posEnListaIngredeintesQueUsara; j++)
-                    {
-                        ingredeintesQueUsara[j] = ingredeintesQueUsara[j + 1];
-                    }
-
-                    ingredeintesQueUsara[posEnListaIngredeintesQueUsara] = null;
-                    loEncontro = true;
-                    posEnListaIngredeintesQueUsara--;
-                }*/
+                posEnListaIngredeintesQueUsara--;
             }
         }
 
@@ -94,13 +93,14 @@ public class Accion : MonoBehaviour
     // Vacia la lista y retorna el indice de la posisicon actual a 0
     public void vaciarListaRecursosActuales()
     {
-        for(int i=0; i < posEnListaIngredeintesQueUsara; i++)
+        Debug.Log("tamaño lista es: "+ingredeintesQueUsara.Count);
+        for (int i = 0; i < ingredeintesQueUsara.Count ;i++)//posEnListaIngredeintesQueUsara; i++)
         {
             GameObject objetoBorrar = ingredeintesQueUsara[i];
             ElementoRecursos elem = objetoBorrar.GetComponent<ElementoRecursos>();
             elem.deseleccionarEsteElemento();
 
-            ingredeintesQueUsara[i] = null;
+            ingredeintesQueUsara.RemoveAt(i); //ingredeintesQueUsara[i] = null;
         }
         posEnListaIngredeintesQueUsara = 0;
     }

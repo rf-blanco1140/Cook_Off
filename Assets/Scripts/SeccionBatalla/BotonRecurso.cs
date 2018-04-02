@@ -14,14 +14,19 @@ public class BotonRecurso : MonoBehaviour
 
 
 
-    public void inicializarValoresBoton(int posEnLista)
+    public void inicializarValoresBoton(int posEnLista, string nombre)
     {
-        //ingredienteStats = GameManager.instance.getElementoInventario(posEnLista); //objetoIngrediente.GetComponent<POIngrediente>();
-        nombreBoton.text = GameManager.instance.getElementoInventario(posEnLista).getNombre();
+        nombreBoton.text = nombre;
+        posComponenteIngredeinte = posEnLista;
     }
 
     public void agregarComponenteIngredeinte(int posEnLista)
     {
         posComponenteIngredeinte = posEnLista;
+    }
+
+    public int posicionDeRecurso()
+    {
+        return posComponenteIngredeinte;
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class RecursosManager : MonoBehaviour
 {
     public SimpleObjectPool buttonObjectPool;
-    //public List<int> listaIngredientes;
     public Transform contentPanel;
     private GameObject primerBotonEnLista;
     public Button botonPadre;
@@ -18,18 +17,12 @@ public class RecursosManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.getInventario() == null) { Debug.Log("es nulo"); }
-        if (GameManager.instance == null) { Debug.Log("NO es nulo"); }
-        if (GameManager.instance.getInventario() == null || GameManager.instance.getInventario().Count == 0)
-        {
-            GameManager.instance.llenarInvenatrio();
-        }
-        poblar();
+        
     }
 
     private void OnEnable()
     {
-        if (GameManager.instance != null && GameManager.instance.getInventario() != null)
+        if (IngredientLoader.instance != null && BattleMenuManager.instance != null && BattleMenuManager.instance.getAccionSeleccionada() != null)
         {
             poblar();
         }
@@ -39,11 +32,12 @@ public class RecursosManager : MonoBehaviour
     {
         //listaIngredientes = GameManager.instance.getInventario();
         RemoveButtons();
-        if(GameManager.instance.getElementoInventario(0).GetComponent<POEstado>() !=null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cortar")
+        
+        if(BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cortar")
         {
             addBotonesParaCortar();
         }
-        else if(GameManager.instance.getElementoInventario(0).GetComponent<POEstado>() != null && BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cocinar")
+        else if(BattleMenuManager.instance.getAccionSeleccionada().GetComponentInChildren<Text>().text == "Cocinar")
         {
             addBotonesParaCocinar();
         }
@@ -73,7 +67,7 @@ public class RecursosManager : MonoBehaviour
         //Si es el ultimo el elemento de abajo es el primero
         Button esteBoton = newButton.GetComponent<Button>();
         Navigation btnNav = esteBoton.navigation;
-        if (i == (GameManager.instance.getInventario().Count-1) && i > 0) //(listaIngredientes.Count - 1) && i > 0)
+        if (i == (IngredientLoader.instance.darIngredientes().Count-1) && i > 0) //(listaIngredientes.Count - 1) && i > 0)
         {
             //Debug.Log("esta en el final");
 
@@ -111,7 +105,7 @@ public class RecursosManager : MonoBehaviour
 
             contentPanel.GetChild(i - 1).gameObject.GetComponent<Button>().navigation = newNav;
         }
-        else if (i == (GameManager.instance.getInventario().Count - 1) && i == 0)
+        else if (i == (IngredientLoader.instance.darIngredientes().Count - 1) && i == 0)
         {
             Navigation newNav = new Navigation();
             newNav.mode = Navigation.Mode.Explicit;
@@ -231,11 +225,8 @@ public class RecursosManager : MonoBehaviour
     public void addButtons()
     {
         //Debug.Log("En RM la lista de ingredeintes tiene "+(listaIngredientes.Count-1)+" posiciones en ingredientes");
-        List<POIngrediente> refDeb = GameManager.instance.getInventario();
-        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
+        for (int i = 0; i < IngredientLoader.instance.darIngredientes().Count; i++)
         {
-            POIngrediente esteIngredeinte = null;
-            //esteIngredeinte = listaIngredientes[i];
             GameObject newButton = buttonObjectPool.GetObject();
             newButton.transform.SetParent(contentPanel);
 
@@ -247,7 +238,7 @@ public class RecursosManager : MonoBehaviour
             ingreStats.definirComponentes(esteIngredeinte.darComponentes());*/
 
             BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-            nuevoElementoMenu.inicializarValoresBoton(i);
+            nuevoElementoMenu.inicializarValoresBoton(i, IngredientLoader.instance.darIngredienteIndice(i).getNombre());
 
             setUpElementoMenu(newButton);
 
@@ -265,10 +256,10 @@ public class RecursosManager : MonoBehaviour
     {
         int posListaUsables = 0;
 
-        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
+        for (int i = 0; i < IngredientLoader.instance.darIngredientes().Count; i++)
         {
             //if (listaIngredientes[i].GetComponent<POEstado>()==null) { Debug.Log("el estado es null"); }
-            if(GameManager.instance.getElementoInventario(i).darEstado().fueCortado() == false)  //listaIngredientes[i].GetComponent<POEstado>().fueCortado())
+            if (!IngredientLoader.instance.darIngredienteIndice(i).darEstado().fueCortado())  //listaIngredientes[i].GetComponent<POEstado>().fueCortado())
             {
                 //POIngrediente esteIngredeinte = listaIngredientes[i];
                 GameObject newButton = buttonObjectPool.GetObject();
@@ -280,7 +271,7 @@ public class RecursosManager : MonoBehaviour
                 ingreStats.definirNombre(esteIngredeinte.getNombre());*/
 
                 BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-                nuevoElementoMenu.inicializarValoresBoton(i);
+                nuevoElementoMenu.inicializarValoresBoton(i, IngredientLoader.instance.darIngredienteIndice(i).getNombre());
 
                 setUpElementoMenu(newButton);
 
@@ -299,9 +290,9 @@ public class RecursosManager : MonoBehaviour
     {
         int posListaUsables = 0;
 
-        for (int i = 0; i < GameManager.instance.getInventario().Count; i++)
+        for (int i = 0; i < IngredientLoader.instance.darIngredientes().Count; i++)
         {
-            if (!GameManager.instance.getElementoInventario(i).darEstado().fueCocinado()) //listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
+            if (!IngredientLoader.instance.darIngredienteIndice(i).darEstado().fueCocinado()) //listaIngredientes[i].GetComponent<POEstado>().fueCocinado())
             {
                 //POIngrediente esteIngredeinte = listaIngredientes[i];
                 GameObject newButton = buttonObjectPool.GetObject();
@@ -313,11 +304,11 @@ public class RecursosManager : MonoBehaviour
                 ingreStats.definirNombre(esteIngredeinte.getNombre());*/
 
                 BotonRecurso nuevoElementoMenu = newButton.GetComponent<BotonRecurso>();
-                nuevoElementoMenu.inicializarValoresBoton(i);
+                nuevoElementoMenu.inicializarValoresBoton(i, IngredientLoader.instance.darIngredienteIndice(i).getNombre());
 
                 setUpElementoMenu(newButton);
 
-                definirNavegacionRecursos(i, newButton);
+                definirNavegacionRecursos(posListaUsables, newButton);
                 posListaUsables++;
             }
         }

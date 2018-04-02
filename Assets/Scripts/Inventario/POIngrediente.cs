@@ -43,12 +43,16 @@ public class POIngrediente : MonoBehaviour
 
 	// En caso de tratarse de una mezcla de ingredientes,
 	// o del plato terminado, lista de ingredientes que lo componen
-	List<int> componentes;
-	
-	void Start ()
+	List<POIngrediente> componentes;
+
+    private void Awake()
     {
         if (estado == null) { estado = new POEstado(); }
-        componentes = new List<int>();
+        componentes = new List<POIngrediente>();
+    }
+    void Start ()
+    {
+
     }
 
     // Define el nombre del ingrediente
@@ -58,29 +62,17 @@ public class POIngrediente : MonoBehaviour
     }
 
     // Define el nombre del ingrediente
-    public void definirComponentes(List<int> pIngredientes)
+    public void definirComponentes(List<POIngrediente> pIngredientes)
     {
-        foreach(int ingredientePos in pIngredientes)
+        foreach(POIngrediente ingredientePos in pIngredientes)
         {
             componentes.Add(ingredientePos);
         }
     }
 
-    public List<int> darComponentes()
+    public List<POIngrediente> darComponentes()
     {
         return componentes;
-    }
-
-    public void Limpiar()
-    {
-        if (componentes != null)
-        {
-            componentes.Clear();
-        }
-        else
-        {
-            componentes = new List<int>();
-        }
     }
 
     // Retorna el nombre del ingrediente
@@ -94,12 +86,11 @@ public class POIngrediente : MonoBehaviour
         else
         {
             cadena = nombre + " (";
-            /*Debug.Log(componentes[0].darComponentes());
             foreach(POIngrediente ingrediente in componentes)
             {
                 // LA LINEA DEL DEMONIO
-                //cadena = cadena + ingrediente.getNombre() + ", ";
-            }*/
+                cadena = cadena + ingrediente.getNombre() + ", ";
+            }
             cadena = cadena.Substring(0, cadena.Length - 2);
             cadena += ")";
         }
@@ -114,12 +105,11 @@ public class POIngrediente : MonoBehaviour
 	{
 		float cantidadSabor = 0;
 		
-        if(componentes!= null)
+        if(componentes != null)
         {
-            foreach (int ingredientePos in componentes)
+            foreach (POIngrediente ingredientePos in componentes)
             {
-                List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-                cantidadSabor += refEnciclopedia[ingredientePos].darSabor(pSabor); //ingredientePos.darSabor(pSabor);
+                cantidadSabor += ingredientePos.darSabor(pSabor);
             }
         }
 		
@@ -175,10 +165,9 @@ public class POIngrediente : MonoBehaviour
 
         if(componentes != null)
         {
-            foreach (int ingredientePos in componentes)
+            foreach (POIngrediente ingredientePos in componentes)
             {
-                List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-                laTextura = laTextura || refEnciclopedia[ingredientePos].darTextura(pTextura); //ingredientePos.darTextura(pTextura);
+                ingredientePos.darTextura(pTextura);
             }
         }
 					
@@ -205,23 +194,18 @@ public class POIngrediente : MonoBehaviour
 	}
 
 	// Adiciona los ingredientes especificados a la lista de componentes
-	public void mezclar(List<int> pIngredientesPos)
+	public void mezclar(POIngrediente pIngredientesPos)
 	{
-        foreach(int ingredientePos in pIngredientesPos)
-		{
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            GameManager.instance.agregarEnInventario(refEnciclopedia[ingredientePos]); //componentes.Add(ingredientePos);
-		}
+        componentes.Add(pIngredientesPos);
 	}
 
 	// Corta el ingrediente, o si es el caso, todos los componentes de la mezcla
 	public void cortar()
 	{
 		estado.cortar();
-		foreach(int ingredientePos in componentes)
+		foreach(POIngrediente ingredientePos in componentes)
 		{
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            refEnciclopedia[ingredientePos].cortar(); //ingredientePos.cortar();
+            ingredientePos.cortar();
         }
 	}
 
@@ -229,11 +213,9 @@ public class POIngrediente : MonoBehaviour
 	public void cocinar()
 	{
 		estado.cocinar();
-		foreach(int ingredientePos in componentes)
+		foreach(POIngrediente ingredientePos in componentes)
 		{
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            refEnciclopedia[ingredientePos].cocinar(); //ingredientePos.cocinar();
-
+            ingredientePos.cocinar();
         }
 	}
 
@@ -258,10 +240,9 @@ public class POIngrediente : MonoBehaviour
         {
             cortados++;
         }
-        foreach (int ingredientePos in componentes)
+        foreach (POIngrediente ingredientePos in componentes)
         {
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            cortados += refEnciclopedia[ingredientePos].fueCortado(); //ingredientePos.fueCortado();
+            ingredientePos.fueCortado();
         }
         return cortados;
 	}
@@ -275,10 +256,9 @@ public class POIngrediente : MonoBehaviour
         {
             cocinados++;
         }
-        foreach (int ingredientePos in componentes)
+        foreach (POIngrediente ingredientePos in componentes)
         {
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            cocinados += refEnciclopedia[ingredientePos].fueCocinado(); //ingredientePos.fueCocinado();
+            ingredientePos.fueCocinado();
         }
         return cocinados;
 	}
@@ -287,10 +267,9 @@ public class POIngrediente : MonoBehaviour
     {
         int cantidad = 0;
         cantidad++;
-        foreach (int ingredientePos in componentes)
+        foreach (POIngrediente ingredientePos in componentes)
         {
-            List<POIngrediente> refEnciclopedia = GameManager.instance.getEnciclopedia();
-            cantidad += refEnciclopedia[ingredientePos].contarIngredientes(); //ingredientePos.contarIngredientes();
+            cantidad += ingredientePos.contarIngredientes();
         }
         return cantidad;
     }
@@ -298,7 +277,10 @@ public class POIngrediente : MonoBehaviour
 	// Permite configurar los requerimientos de corte y cocción del ingrediente
 	public void configurar(bool pCorte, bool pCoccion)
 	{
-        if (estado==null) { estado = new POEstado(); }
+        if (estado==null)
+        {
+            estado = new POEstado();
+        }
 		estado.configurar(pCorte, pCoccion);
 	}
 

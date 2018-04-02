@@ -55,7 +55,7 @@ public class SistemaDePuntos : MonoBehaviour {
         actualizarPuntaje();
     }
 
-    public void evaluarPlatoFinal(List<POIngrediente> ingredientesServidos)
+    public void evaluarPlatoFinal(List<int> ingredientesServidos)
     {
         terminado = true;
         int cantidadIngredientes = 0;
@@ -71,8 +71,10 @@ public class SistemaDePuntos : MonoBehaviour {
         bool humedo = false;
         bool seco = false;
 
-        foreach(POIngrediente ingrediente in ingredientesServidos)
+        for(int i=0;i<ingredientesServidos.Count;i++)//foreach(POIngrediente ingrediente in ingredientesServidos)
         {
+            POIngrediente ingrediente = null;
+
             cantidadIngredientes += ingrediente.contarIngredientes();
 
             sinCortar += ingrediente.fueCortado();

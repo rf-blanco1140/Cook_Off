@@ -6,10 +6,10 @@ public class POEstado : MonoBehaviour
 {
 
 	// Indica si el ingrediente requiere de corte, para la evaluación del plato
-	bool requiereCorte;
+	public bool requiereCorte;
 
 	// Indica si el ingrediente requiere de cocción, para la evaluación del plato
-	bool requiereCoccion;
+	public bool requiereCoccion;
 
 	// Indica si el ingrediente fue cortado, para la evaluación del plato
 	bool cortado;
@@ -33,7 +33,8 @@ public class POEstado : MonoBehaviour
 	// True es el caso favorable, false el caso contrario.
 	public bool fueCortado()
 	{
-		if(!requiereCorte)
+		
+        if(!requiereCorte)
 		{
 			return true;
 		}

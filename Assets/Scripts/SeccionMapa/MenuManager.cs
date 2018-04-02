@@ -52,10 +52,10 @@ public class MenuManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown("return"))
+		/*if(Input.GetKeyDown("return"))
         {
             inMapMenu.SetActive(true);
-        }
+        }*/
 	}
 
     public GameObject getUltimaOpcionSeleccionada()

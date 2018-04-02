@@ -25,12 +25,6 @@ public class BattleMenuManager : MonoBehaviour
     // Subaccion que se esta seleccionando
     private GameObject subAccionSeleccionada;
 
-    // Lista con todos los ingredientes, en cualquier estado
-    private List<GameObject> listaTotalIngredientes;
-
-    // Lista de los ingredientes que se van a usar en la subaccion seleccionada
-    private List<GameObject> ingredientesListosParaUsar;
-
     private GameObject peleaRitmoReference;
 
 
@@ -58,11 +52,6 @@ public class BattleMenuManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if(GameManager.instance.getInventario() == null || GameManager.instance.getInventario().Count == 0)
-        {
-            GameManager.instance.llenarInvenatrio();
-        }
-
         //Disapear mouse cousor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -70,17 +59,9 @@ public class BattleMenuManager : MonoBehaviour
         objetoPadreRecursosDisponibles = GameObject.Find("ListaCompletaIngredientes");
         peleaRitmoReference = GameObject.Find("PeleaRitmo");
 
-        ingredientesListosParaUsar = new List<GameObject>();
-        listaTotalIngredientes = new List<GameObject>();
+        //listaTotalIngredientes = new List<GameObject>();
         if (objetoPadreRecursosDisponibles.transform.GetChild(0) == null) { Debug.Log("objetos padre es nulo"); }
-        for (int i=0; i < objetoPadreRecursosDisponibles.transform.childCount; i++)
-        {
-            ingredientesListosParaUsar.Add(objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject);
-            listaTotalIngredientes.Add(ingredientesListosParaUsar[i]);
-            //ingredientesListosParaUsar[i] = objetoPadreRecursosDisponibles.transform.GetChild(i).gameObject;
-            //listaTotalIngredientes[i] = ingredientesListosParaUsar[i];
-        }
-
+        
         objetoPadreRecursosDisponibles.SetActive(false);
         peleaRitmoReference.SetActive(false);
 
@@ -90,12 +71,6 @@ public class BattleMenuManager : MonoBehaviour
     // Metodo que guarda la ultima accion seleccionada
     public void seleccionarAccion(GameObject pAccionSeleccionada)
     {
-        if (pAccionSeleccionada == null) { Debug.Log("objeto null"); }
-        if (pAccionSeleccionada.name == null) { Debug.Log("nombre null"); }
-        if (pAccionSeleccionada.GetComponentInChildren<Text>()==null) { Debug.Log("compont txt null"); }
-        if (pAccionSeleccionada.GetComponentInChildren<Text>().text==null) { Debug.Log("texto null"); }
-        //if (accionSeleccionada == null) { Debug.Log("accSelct null"); }
-        if (accionSeleccionada!=null) { Debug.Log("accSelct NOT null"); }
         accionSeleccionada = pAccionSeleccionada;
         string nombreAcc = accionSeleccionada.GetComponentInChildren<Text>().text;
     }
@@ -146,9 +121,6 @@ public class BattleMenuManager : MonoBehaviour
     public void cerrarSubPaneles()
     {
         GameObject.Find("Cocinar").gameObject.SetActive(false);
-        /*GameObject.Find("Mezclar").gameObject.SetActive(false);
-        GameObject.Find("Cortar").gameObject.SetActive(false);
-        GameObject.Find("Servir").gameObject.SetActive(false);*/
     }
 
     /// <summary>
@@ -178,7 +150,7 @@ public class BattleMenuManager : MonoBehaviour
     /// Se llama cada vez que se selecciona la subaccion
     /// </summary>
     /// <param name="accionDefinida"> La accion que se va a realizar </param>
-    public void definirIngredientesUsables(string accionDefinida)
+    /*public void definirIngredientesUsables(string accionDefinida)
     {
         for (int i = 0; i < listaTotalIngredientes.Count; i++)
         {
@@ -209,11 +181,11 @@ public class BattleMenuManager : MonoBehaviour
                 ingredientesListosParaUsar[i] = esteIngrediente;
             }
         }
-    }
+    }*/
 
     public List<GameObject> getIngredeintesUsables()
     {
-        return ingredientesListosParaUsar;
+        return null;
     }
 
 
@@ -260,21 +232,12 @@ public class BattleMenuManager : MonoBehaviour
     public void mezclarIngredientesListos()
     {
         Debug.Log("A_Mezclar");
-        List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
-        POIngrediente primero = listaIngreEnAccion[0].GetComponent<POIngrediente>(); //ingredientesListosParaUsar[0].GetComponent<POIngrediente>();
-        if (primero==null) { Debug.Log("primero es null"); }
-        List<POIngrediente> lista = new List<POIngrediente>();
-        GameManager.instance.sacarDeInventario(primero.getNombre()); //listaTotalIngredientes.Remove(primero.gameObject);
-        for (int i = 1; i < Accion.instance.getNumeroDeIngredientes(); i++)//ingredientesListosParaUsar.Count; i++)
+        //List<GameObject> listaIngreEnAccion = Accion.instance.getListaIngredeintesEnAccion();
+        List<int> posIngredeintes = Accion.instance.getPosicionIngredeintesEnAccion();
+        for (int i = 1; i < posIngredeintes.Count; i++)//ingredientesListosParaUsar.Count; i++)
         {
-            List<GameObject> lisIngredeintes = Accion.instance.getListaIngredeintesEnAccion();
-            GameObject ingredientSubI = lisIngredeintes[i];
-            POIngrediente temp = ingredientSubI.GetComponent<POIngrediente>();
-            lista.Add(temp);
-            GameManager.instance.sacarDeInventario(temp.getNombre()); //listaTotalIngredientes.Remove(temp.gameObject);
+            IngredientLoader.instance.mezclarIngrediente(posIngredeintes[0], posIngredeintes[i]);
         }
-        primero.mezclar(lista);
-        GameManager.instance.agregarEnInventario(primero);
     }
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -285,18 +248,21 @@ public class BattleMenuManager : MonoBehaviour
         SistemaDePuntos.instance.evaluarPlatoFinal(darIngredientesServidos());
     }
 
-    public List<POIngrediente> darIngredientesServidos()
+    public List<int> darIngredientesServidos()
     {
-        List<POIngrediente> servidos = new List<POIngrediente>();
-        foreach(GameObject ingrediente in listaTotalIngredientes)
+        /*
+        List<int> servidos = new List<int>();
+        for(int i=0; i<GameManager.instance.getInventario().Count;i++)//foreach(GameObject ingrediente in listaTotalIngredientes)
         {
-            POIngrediente elIngrediente = ingrediente.GetComponent<POIngrediente>();
-            if(elIngrediente.estaServido())
+            //POIngrediente elIngrediente = ingrediente.GetComponent<POIngrediente>();
+            if(GameManager.instance.getElementoInventario(i).estaServido())
             {
-                servidos.Add(elIngrediente);
+                servidos.Add(i);
             }
         }
         return servidos;
+        */
+        return null;
     }
 
     // Method that manages the mouse click events so it dosn't fuck up everything else

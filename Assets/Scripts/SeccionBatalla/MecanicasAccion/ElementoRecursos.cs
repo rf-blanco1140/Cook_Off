@@ -33,7 +33,9 @@ public class ElementoRecursos : MonoBehaviour
         }
         else
         {
-            Accion.instance.agregarIngredeintesParaAccion(this.gameObject);
+            int pos = this.GetComponent<BotonRecurso>().posicionDeRecurso();  //GameManager.instance.getInventario().IndexOf(this.gameObject.GetComponent<POIngrediente>());
+            //Debug.Log("la pos es "+ pos);
+            Accion.instance.agregarIngredeintesParaAccion(this.gameObject, pos);
             estaSeleccionado = true;
         }
 

@@ -44,6 +44,28 @@ public class ComandosManager : MonoBehaviour
         //nuevoComando = new Comando();
     }
 
+    public void marcarIngredientesComoCortados()
+    {
+        List<int> posIngredientesAccion = Accion.instance.getPosicionIngredeintesEnAccion();
+        for(int i=0; i<posIngredientesAccion.Count;i++)
+        {
+            Debug.Log("cantidad de ing en acc " + posIngredientesAccion.Count);
+            Debug.Log("la pos cambio es " + posIngredientesAccion[i]);
+            IngredientLoader.instance.darIngredienteIndice(posIngredientesAccion[i]).cortar();
+        }
+    }
+
+    public void marcarIngredientesComoCocinado()
+    {
+        List<int> posIngredientesAccion = Accion.instance.getPosicionIngredeintesEnAccion();
+        for (int i = 0; i < posIngredientesAccion.Count; i++)
+        {
+            Debug.Log("cantidad de ing en acc " + posIngredientesAccion.Count);
+            Debug.Log("la pos cambio es " + posIngredientesAccion[i]);
+            IngredientLoader.instance.darIngredienteIndice(posIngredientesAccion[i]).cocinar();
+        }
+    }
+
     // Ejecuta el minijuego de ritmo de la subaccion correspondiente
     public void ejecutarSubaccion()
     {
@@ -59,12 +81,15 @@ public class ComandosManager : MonoBehaviour
             {
                 case "Juliana":
                     comandosCorteJuliana();
+                    marcarIngredientesComoCortados();
                     break;
                 case "Chips":
                     comandosCorteChips();
+                    marcarIngredientesComoCortados();
                     break;
                 case "Cuadros":
                     comandosCorteCuadros();
+                    marcarIngredientesComoCortados();
                     break;
                 case "A_Mano":
                     comandosMezclaAMano();
@@ -72,17 +97,20 @@ public class ComandosManager : MonoBehaviour
                 case "Asar":
                     BattleMenuManager.instance.limpiarSubAccionSeleccionada();
                     BattleMenuManager.instance.cerrarSubPaneles();
+                    marcarIngredientesComoCocinado();
                     //BattleMenuManager.instance.limpiarAccionSeleccionada();
                     comandosCorteJuliana();
                     break;
                 case "Hervir":
                     BattleMenuManager.instance.limpiarSubAccionSeleccionada();
                     BattleMenuManager.instance.cerrarSubPaneles();
+                    marcarIngredientesComoCocinado();
                     comandosCorteJuliana();
                     break;
                 case "Hornear":
                     BattleMenuManager.instance.limpiarSubAccionSeleccionada();
                     BattleMenuManager.instance.cerrarSubPaneles();
+                    marcarIngredientesComoCocinado();
                     comandosCorteJuliana();
                     break;
                 case "Elegante":

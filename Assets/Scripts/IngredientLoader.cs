@@ -10,21 +10,39 @@ public class IngredientLoader : MonoBehaviour
 
     SimpleObjectPool poolIngredientes;
 
-	void Start()
-	{
-        //poolIngredientes = GetComponent<SimpleObjectPool>();
-		//LeerData();
-	}
-    
-    public List<POIngrediente> setUpAndRun()
-    {
-        poolIngredientes = GameObject.Find("ButtonObjectPool").GetComponent<SimpleObjectPool>();
-        LeerData();
+    public static IngredientLoader instance = null;
 
-        return ingredientes;
+    //Awake is always called before any Start functions
+    void Awake()
+    {
+        //Check if instance already exists
+        if (instance == null)
+
+            //if not, set instance to this
+            instance = this;
+
+        //If instance already exists and it's not this:
+        else if (instance != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+
+        
+
     }
 
-    public void LeerData()
+    void Start()
+	{
+        setUpAndRun();
+    }
+
+    private void setUpAndRun()
+    {
+        poolIngredientes = GetComponent<SimpleObjectPool>();
+        LeerData();
+    }
+
+    private void LeerData()
     {
         string path = "Assets/Resources/ingredients.txt";
 
@@ -61,6 +79,34 @@ public class IngredientLoader : MonoBehaviour
             lineaActual = reader.ReadLine();
         }
         reader.Close();
+    }
+
+    public List<POIngrediente> darIngredientes()
+    {
+        return ingredientes;
+    }
+
+    public POIngrediente darIngredienteIndice(int indice)
+    {
+        return ingredientes[indice];
+    }
+
+    public POIngrediente darIngredienteNombre(string nombre)
+    {
+        foreach (POIngrediente ingrediente in ingredientes)
+        {
+            if (ingrediente.getNombre().StartsWith(nombre))
+            {
+                return ingrediente;
+            }
+        }
+        return null;
+    }
+
+    public void mezclarIngrediente(int posPrimario, int posSecundario)
+    {
+        ingredientes[posPrimario].mezclar(ingredientes[posSecundario]);
+        ingredientes.RemoveAt(posSecundario);
     }
 
 }
