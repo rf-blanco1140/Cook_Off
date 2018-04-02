@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SistemaDePuntos : MonoBehaviour {
 
+    public GameObject panelPuntaje;
+
     float puntaje;
 
     float timer = 60;
@@ -146,6 +148,29 @@ public class SistemaDePuntos : MonoBehaviour {
             "Bonus por textura seco: +" + bonusSeco + "pts \n" +
             "--------------------------- \n" +
             "TOTAL = " + total + " pts.";
+
+        panelPuntaje.SetActive(true);
+
+        GameObject.Find("TextEditable").GetComponent<Text>().text = puntaje+"";
+        GameObject.Find("TextEditable (1)").GetComponent<Text>().text = sinCortar + "";
+        GameObject.Find("TextEditable (17)").GetComponent<Text>().text = cantidadIngredientes + "";
+        GameObject.Find("TextEditable (3)").GetComponent<Text>().text = (sinCortar * 50) + "";
+        GameObject.Find("TextEditable (2)").GetComponent<Text>().text = sinCocinar + "";
+        GameObject.Find("TextEditable (16)").GetComponent<Text>().text = cantidadIngredientes + "";
+        GameObject.Find("TextEditable (4)").GetComponent<Text>().text = (sinCocinar * 50) + "";
+        GameObject.Find("TextEditable (5)").GetComponent<Text>().text = acido + "";
+        GameObject.Find("TextEditable (6)").GetComponent<Text>().text = amargo + "";
+        GameObject.Find("TextEditable (7)").GetComponent<Text>().text = dulce + "";
+        GameObject.Find("TextEditable (8)").GetComponent<Text>().text = salado + "";
+        GameObject.Find("TextEditable (9)").GetComponent<Text>().text = umami + "";
+        GameObject.Find("TextEditable (10)").GetComponent<Text>().text = balance + "";
+        GameObject.Find("TextEditable (11)").GetComponent<Text>().text = bonusCrujiente + "";
+        GameObject.Find("TextEditable (12)").GetComponent<Text>().text = bonusSuave + "";
+        GameObject.Find("TextEditable (13)").GetComponent<Text>().text = bonusHumedo + "";
+        GameObject.Find("TextEditable (14)").GetComponent<Text>().text = bonusSeco + "";
+        GameObject.Find("TextEditable (15)").GetComponent<Text>().text = total + "";
+
+        
 
         Debug.Log(resultado);
 
